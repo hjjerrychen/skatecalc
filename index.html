@@ -13,92 +13,105 @@
 <body>
   <h1>Figure Skating Score Calculator</h1>
 
-  <div class="container m-0">
+  <div class="container-fluid m-0">
     <div class="row">
-      <div class="col">
+      <div class="col-md-4">
         <nav>
-          <div class="nav nav-tabs" id="ele-sel-nav-tab" role="tablist">
-            <a class="nav-item nav-link active" id="nav-jmp-tab" data-toggle="tab" href="#nav-jmp" role="tab" aria-controls="nav-jmp" aria-selected="true">Jumps</a>
-            <a class="nav-item nav-link" id="nav-sp-tab" data-toggle="tab" href="#nav-sp" role="tab" aria-controls="nav-sp" aria-selected="false">Spins</a>
-            <a class="nav-item nav-link" id="nav-seq-tab" data-toggle="tab" href="#nav-seq" role="tab" aria-controls="nav-seq" aria-selected="false">Sequences</a>
-          </div>
-        </nav>
         <div class="tab-content" id="nav-tabContent">
           <div class="tab-pane fade show active" id="nav-jmp" role="tabpanel" aria-labelledby="nav-jmp-tab">
             <h2>Jumps</h2>
-            <div class="btn-group">
-              <button type="button" class="btn btn-outline-primary">&lt;</button>
-              <button type="button" class="btn btn-outline-primary">&lt;&lt;</button>
-              <button type="button" class="btn btn-outline-primary">e</button>
-              <button type="button" class="btn btn-outline-primary">+REP</button>
-              <button type="button" class="btn btn-outline-primary">x</button>
-              <button type="button" class="btn btn-outline-primary">*</button>
+            <div>
+              <div class="btn-group">
+                <button type="button" class="btn btn-outline-primary">&lt;</button>
+                <button type="button" class="btn btn-outline-primary">&lt;&lt;</button>
+                <button type="button" class="btn btn-outline-primary">e</button>
+                <button type="button" class="btn btn-outline-primary">+REP</button>
+                <button type="button" class="btn btn-outline-primary">x</button>
+                <button type="button" class="btn btn-outline-primary">*</button>
+              </div>
             </div>
 
-            <div id="a">
-              <button type="button" class="btn btn-primary">A</button>
-              <button type="button" class="btn btn-outline-primary">1</button>
-              <button type="button" class="btn btn-outline-primary">2</button>
-              <button type="button" class="btn btn-outline-primary">3</button>
-              <button type="button" class="btn btn-outline-primary">4</button>
+            <div>
+              <div id="a" class="btn-group">
+                <button type="button" class="btn btn-primary">A</button>
+                <button type="button" class="btn btn-outline-primary">1</button>
+                <button type="button" class="btn btn-outline-primary">2</button>
+                <button type="button" class="btn btn-outline-primary">3</button>
+                <button type="button" class="btn btn-outline-primary">4</button>
+              </div>
+
+
+              <div id="t" class="btn-group">
+                <button type="button" class="btn btn-primary">T</button>
+                <button type="button" class="btn btn-outline-primary">1</button>
+                <button type="button" class="btn btn-outline-primary">2</button>
+                <button type="button" class="btn btn-outline-primary">3</button>
+                <button type="button" class="btn btn-outline-primary">4</button>
+              </div>
             </div>
 
-            <div id="t">
-              <button type="button" class="btn btn-primary">T</button>
-              <button type="button" class="btn btn-outline-primary">1</button>
-              <button type="button" class="btn btn-outline-primary">2</button>
-              <button type="button" class="btn btn-outline-primary">3</button>
-              <button type="button" class="btn btn-outline-primary">4</button>
+            <div>
+
+              <div id="s" class="btn-group">
+                <button type="button" class="btn btn-primary">S</button>
+                <button type="button" class="btn btn-outline-primary">1</button>
+                <button type="button" class="btn btn-outline-primary">2</button>
+                <button type="button" class="btn btn-outline-primary">3</button>
+                <button type="button" class="btn btn-outline-primary">4</button>
+              </div>
+
+
+
+              <div id="lo" class="btn-group">
+                <button type="button" class="btn btn-primary">Lo</button>
+                <button type="button" class="btn btn-outline-primary">1</button>
+                <button type="button" class="btn btn-outline-primary">2</button>
+                <button type="button" class="btn btn-outline-primary">3</button>
+                <button type="button" class="btn btn-outline-primary">4</button>
+              </div>
+            </div>
+            <div>
+
+              <div id="f" class="btn-group">
+                <button type="button" class="btn btn-primary">F</button>
+                <button type="button" class="btn btn-outline-primary">1</button>
+                <button type="button" class="btn btn-outline-primary">2</button>
+                <button type="button" class="btn btn-outline-primary">3</button>
+                <button type="button" class="btn btn-outline-primary">4</button>
+              </div>
+
+
+              <div id="lz" class="btn-group">
+                <button type="button" class="btn btn-primary">Lz</button>
+                <button type="button" class="btn btn-outline-primary">1</button>
+                <button type="button" class="btn btn-outline-primary">2</button>
+                <button type="button" class="btn btn-outline-primary">3</button>
+                <button type="button" class="btn btn-outline-primary">4</button>
+              </div>
+            </div>
+            <div>
+
+              <div id="eu" class="btn-group">
+                <button type="button" class="btn btn-primary">Eu</button>
+                <button type="button" class="btn btn-outline-primary">1</button>
+              </div>
             </div>
 
-            <div id="s">
-              <button type="button" class="btn btn-primary">S</button>
-              <button type="button" class="btn btn-outline-primary">1</button>
-              <button type="button" class="btn btn-outline-primary">2</button>
-              <button type="button" class="btn btn-outline-primary">3</button>
-              <button type="button" class="btn btn-outline-primary">4</button>
-            </div>
-
-            <div id="lo">
-              <button type="button" class="btn btn-primary">Lo</button>
-              <button type="button" class="btn btn-outline-primary">1</button>
-              <button type="button" class="btn btn-outline-primary">2</button>
-              <button type="button" class="btn btn-outline-primary">3</button>
-              <button type="button" class="btn btn-outline-primary">4</button>
-            </div>
-
-            <div id="f">
-              <button type="button" class="btn btn-primary">F</button>
-              <button type="button" class="btn btn-outline-primary">1</button>
-              <button type="button" class="btn btn-outline-primary">2</button>
-              <button type="button" class="btn btn-outline-primary">3</button>
-              <button type="button" class="btn btn-outline-primary">4</button>
-            </div>
-
-            <div id="lz">
-              <button type="button" class="btn btn-primary">Lz</button>
-              <button type="button" class="btn btn-outline-primary">1</button>
-              <button type="button" class="btn btn-outline-primary">2</button>
-              <button type="button" class="btn btn-outline-primary">3</button>
-              <button type="button" class="btn btn-outline-primary">4</button>
-            </div>
-
-            <div id="eu">
-              <button type="button" class="btn btn-primary">Eu</button>
-              <button type="button" class="btn btn-outline-primary">1</button>
-            </div>
           </div>
           <div class="tab-pane fade" id="nav-sp" role="tabpanel" aria-labelledby="nav-sp-tab">
             <h2>Spins</h2>
+            <div>
 
-            <div class="btn-group">
-              <button type="button" class="btn btn-outline-dark">F</button>
-              <button type="button" class="btn btn-outline-dark">C</button>
-              <button type="button" class="btn btn-outline-dark">V</button>
-              <button type="button" class="btn btn-outline-dark">*</button>
+              <div class="btn-group">
+                <button type="button" class="btn btn-outline-dark">F</button>
+                <button type="button" class="btn btn-outline-dark">C</button>
+                <button type="button" class="btn btn-outline-dark">V</button>
+                <button type="button" class="btn btn-outline-dark">*</button>
+              </div>
             </div>
 
-            <div id="usp">
+
+            <div id="usp" class="btn-group">
               <button type="button" class="btn btn-dark">USp</button>
               <button type="button" class="btn btn-outline-dark">B</button>
               <button type="button" class="btn btn-outline-dark">1</button>
@@ -107,7 +120,7 @@
               <button type="button" class="btn btn-outline-dark">4</button>
             </div>
 
-            <div id="lsp">
+            <div id="lsp" class="btn-group">
               <button type="button" class="btn btn-dark">LSp</button>
               <button type="button" class="btn btn-outline-dark">B</button>
               <button type="button" class="btn btn-outline-dark">1</button>
@@ -116,7 +129,9 @@
               <button type="button" class="btn btn-outline-dark">4</button>
             </div>
 
-            <div id="csp">
+
+
+            <div id="csp" class="btn-group">
               <button type="button" class="btn btn-dark">CSp</button>
               <button type="button" class="btn btn-outline-dark">B</button>
               <button type="button" class="btn btn-outline-dark">1</button>
@@ -125,7 +140,7 @@
               <button type="button" class="btn btn-outline-dark">4</button>
             </div>
 
-            <div id="ssp">
+            <div id="ssp" class="btn-group">
               <button type="button" class="btn btn-dark">SSp</button>
               <button type="button" class="btn btn-outline-dark">B</button>
               <button type="button" class="btn btn-outline-dark">1</button>
@@ -134,7 +149,9 @@
               <button type="button" class="btn btn-outline-dark">4</button>
             </div>
 
-            <div id="cosp">
+
+
+            <div id="cosp" class="btn-group">
               <button type="button" class="btn btn-dark">CoSp</button>
               <button type="button" class="btn btn-outline-dark">B</button>
               <button type="button" class="btn btn-outline-dark">1</button>
@@ -143,27 +160,36 @@
               <button type="button" class="btn btn-outline-dark">4</button>
             </div>
 
+
           </div>
           <div class="tab-pane fade" id="nav-seq" role="tabpanel" aria-labelledby="nav-seq-tab">
             <h2>Sequences</h2>
+            <div>
 
-            <div class="btn-group">
-              <button type="button" class="btn btn-outline-info">*</button>
+              <div class="btn-group">
+                <button type="button" class="btn btn-outline-info">*</button>
+              </div>
             </div>
 
-            <div id="stsq">
-              <button type="button" class="btn btn-info">StSq</button>
-              <button type="button" class="btn btn-outline-info">B</button>
-              <button type="button" class="btn btn-outline-info">1</button>
-              <button type="button" class="btn btn-outline-info">2</button>
-              <button type="button" class="btn btn-outline-info">3</button>
-              <button type="button" class="btn btn-outline-info">4</button>
+            <div>
+
+              <div id="stsq" class="btn-group">
+                <button type="button" class="btn btn-info">StSq</button>
+                <button type="button" class="btn btn-outline-info">B</button>
+                <button type="button" class="btn btn-outline-info">1</button>
+                <button type="button" class="btn btn-outline-info">2</button>
+                <button type="button" class="btn btn-outline-info">3</button>
+                <button type="button" class="btn btn-outline-info">4</button>
+              </div>
+            </div>
+            <div>
+
+              <div id="chsq" class="btn-group">
+                <button type="button" class="btn btn-info">ChSq</button>
+                <button type="button" class="btn btn-outline-info">1</button>
+              </div>
             </div>
 
-            <div id="chsq">
-              <button type="button" class="btn btn-info">ChSq</button>
-              <button type="button" class="btn btn-outline-info">1</button>
-            </div>
           </div>
 
           <div id="goe-sel">
@@ -195,11 +221,11 @@
           </div>
         </div>
       </div>
-      <div class="col">
+      <div class="col-md-8">
         2 of 2
       </div>
     </div>
 
 
-</body>
-</html>
+  </body>
+  </html>
