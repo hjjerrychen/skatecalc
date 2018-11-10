@@ -2,3 +2,13 @@ div {
   padding-top: 1px;
   padding-bottom: 1px;
 }
+
+#elem-disp-div {
+  border: 1px solid black;
+  height: 50px;
+}
+
+#elem-disp{
+  font-size: 1.8em;
+  text-align: center;
+}

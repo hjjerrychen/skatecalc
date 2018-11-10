@@ -16,7 +16,17 @@
   <div class="container-fluid m-0">
     <div class="row">
       <div class="col-md-4">
+        <h5>Selected element</h5>
+        <div id="elem-disp-div">
+          <p id="elem-disp"></p>
+        </div>
         <nav>
+          <div class="nav nav-tabs" id="ele-sel-nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-jmp-tab" data-toggle="tab" href="#nav-jmp" role="tab" aria-controls="nav-jmp" aria-selected="true">Jumps</a>
+            <a class="nav-item nav-link" id="nav-sp-tab" data-toggle="tab" href="#nav-sp" role="tab" aria-controls="nav-sp" aria-selected="false">Spins</a>
+            <a class="nav-item nav-link" id="nav-seq-tab" data-toggle="tab" href="#nav-seq" role="tab" aria-controls="nav-seq" aria-selected="false">Sequences</a>
+          </div>
+        </nav>
         <div class="tab-content" id="nav-tabContent">
           <div class="tab-pane fade show active" id="nav-jmp" role="tabpanel" aria-labelledby="nav-jmp-tab">
             <h2>Jumps</h2>
