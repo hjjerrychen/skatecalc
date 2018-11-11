@@ -10,7 +10,7 @@ var buffer = {
   fly: false,
   cof: false,
   bonus: false,
-  inv: false,
+  invalid: false,
   goe: 0,
   bv: null,
   goeValue: null
@@ -20,27 +20,31 @@ var checkJump = /A$|T$|S$|Lo$|F$|Lz$|Eu$/;
 var checkSpin = /Sp/;
 var checkSeq = /Sq/;
 
+var elementDisplay;
+
 window.onload = function(){
-  //$("#nav-jmp button").click(addText);
-  $(".setName button").click(setName);
-  $(".setLOD button").click(setLOD);
-  $(".setUr").click(setUr);
-  $(".setDg").click(setDg);
-  $(".setEdge").click(setEdge);
-  $(".setREP").click(setREP);
-  $(".setBonus").click(setBonus);
-  $(".setInvalid").click(setInvalid);
-  $(".setFly").click(setFly);
-  $(".setSpinV").click(setSpinV);
-  $(".setCOF").click(setCOF);
-  $(".setGOE button").click(setGOE);
+    //$("#nav-jmp button").click(addText);
+    $(".setName button").click(setName);
+    $(".setLOD button").click(setLOD);
+    $(".setUr").click(setUr);
+    $(".setDg").click(setDg);
+    $(".setEdge").click(setEdge);
+    $(".setREP").click(setREP);
+    $(".setBonus").click(setBonus);
+    $(".setInvalid").click(setInvalid);
+    $(".setFly").click(setFly);
+    $(".setSpinV").click(setSpinV);
+    $(".setCOF").click(setCOF);
+    $(".setGOE button").click(setGOE);
+    elementDisplay = $("#elem-disp");
 
 }
 
 function setName(){
   buffer.name = $(this).html();
-  $("#elem-disp").html(buffer.name);
+  elementDisplay.html(buffer.name);
   setType(this);
+  renderBufferedElement();
 }
 
 // function setType(){
@@ -53,100 +57,137 @@ function setName(){
 //   else {
 //     buffer.type = "seq";
 //   }
-//   $("#elem-disp").append(buffer.type);
+//   elementDisplay.append(buffer.type);
 // }
 
 
 function setType(node){
-  if(buffer.type != null){
-    if ($(node).parents().hasClass(".nav-jmp")){
-      buffer.type = "jump";
-    }
-    else if ($(node).parents().hasClass(".nav-sp")){
-      buffer.type = "spin";
-    }
-    else {
-      buffer.type = "seq";
-    }
-    $("#elem-disp").append(buffer.type);
+  if ($(node).parents(".nav-jmp").length){
+    buffer.type = "jump";
   }
+  else if ($(node).parents(".nav-sp").length){
+    buffer.type = "spin";
+  }
+  else {
+    buffer.type = "seq";
+  }
+
+
+  elementDisplay.append(buffer.type);
 }
 
 
 function setLOD(){
   buffer.lod = $(this).html();
-  $("#elem-disp").append(buffer.lod);
+  elementDisplay.append(buffer.lod);
 }
 
 function setUr(){
   buffer.ur = !buffer.ur;
-  $("#elem-disp").append("<");
+  elementDisplay.append("<");
 
 }
 
 function setDg(){
   buffer.dg = !buffer.dg;
-  $("#elem-disp").append("<<");
+  elementDisplay.append("<<");
 }
 
 function setEdge(){
   buffer.edge = !buffer.edge;
-  $("#elem-disp").append("e");
+  elementDisplay.append("e");
 }
 
 
 function setREP(){
   buffer.rep = !buffer.rep;
-  $("#elem-disp").append("+REP");
+  elementDisplay.append("+REP");
 }
 
 function setBonus(){
   buffer.bonus = !buffer.bonus;
-  $("#elem-disp").append("x");
+  elementDisplay.append("x");
 }
 
 function setInvalid(){
   buffer.invalid = !buffer.invalid;
-  $("#elem-disp").append("*");
+  elementDisplay.append("*");
 }
 
 function setFly(){
   buffer.fly = !buffer.fly;
-  $("#elem-disp").append("F");
+  elementDisplay.append("F");
 }
 
 function setSpinV(){
   buffer.spinV = !buffer.spinV;
-  $("#elem-disp").append("V");
+  elementDisplay.append("V");
 }
 
 function setCOF(){
   buffer.cof = !buffer.cof;
-  $("#elem-disp").append("Co");
+  elementDisplay.append("Co");
 }
 
 function setGOE(){
   buffer.goe = parseInt($(this).html());
-  $("#elem-disp").append(buffer.goe);
+  elementDisplay.append(buffer.goe);
 }
 
-function renderElementSelector(){
+function renderBufferedElement(){
+  elementDisplay.html("");
   if(buffer.type === "jump"){
-
+    if (buffer.lod !== null){
+      elementDisplay.append(buffer.lod);
+    }
+    if (buffer.name !== null){
+      elementDisplay.append(buffer.name);
+    }
+    if (buffer.ur !== false){
+      elementDisplay.append("<");
+    }
+    if (buffer.dg !== false){
+      elementDisplay.append("<<");
+    }
+    if (buffer.edge !== false){
+      elementDisplay.append("e");
+    }
+    if (buffer.edge !== false){
+      elementDisplay.append("e");
+    }
+    if (buffer.rep !== false){
+      elementDisplay.append("+REP");
+    }
   }
   else if(buffer.type === "spin"){
-
+    if (buffer.name !== null){
+      elementDisplay.append(buffer.name);
+    }
+    if (buffer.lod !== null){
+      elementDisplay.append(buffer.lod);
+    }
+    if (buffer.invalid !== false){
+      elementDisplay.append("*");
+    }
   }
   else {
-
+    if (buffer.name !== null){
+      elementDisplay.append(buffer.name);
+    }
+    if (buffer.lod !== null){
+      elementDisplay.append(buffer.lod);
+    }
+    if (buffer.invalid !== false){
+      elementDisplay.append("*");
+    }
   }
 }
-//$("#elem-disp").html("test");
+    //elementDisplay.html("test");
 
 
 
 
 // function addText(){
-//   $("#elem-disp").append(this.innerHTML);
+//   elementDisplay.append(this.innerHTML);
 //
 // }
