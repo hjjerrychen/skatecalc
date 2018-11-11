@@ -11,7 +11,7 @@ div {
 }
 
 #elem-disp{
-  width: 80%;
+  width: 70%;
 }
 
 body {
@@ -19,6 +19,11 @@ body {
 }
 
 #goeDisplay{
-  width: 20%;
+  width: 30%;
   float: right;
+}
+
+.delete{
+  font-size: 1em;
+  padding: 0em;
 }

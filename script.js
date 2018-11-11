@@ -23,20 +23,23 @@ var checkSeq = /Sq/;
 var elementDisplay;
 
 window.onload = function(){
-    //$("#nav-jmp button").click(addText);
-    $(".setName button").click(setName);
-    $(".setLOD button").click(setLOD);
-    $(".setUr").click(setUr);
-    $(".setDg").click(setDg);
-    $(".setEdge").click(setEdge);
-    $(".setREP").click(setREP);
-    $(".setBonus").click(setBonus);
-    $(".setInvalid").click(setInvalid);
-    $(".setFly").click(setFly);
-    $(".setSpinV").click(setSpinV);
-    $(".setCOF").click(setCOF);
-    $(".setGOE button").click(setGOE);
-    elementDisplay = $("#elem-disp");
+  //$("#nav-jmp button").click(addText);
+  $(".setName button").click(setName);
+  $(".setLOD button").click(setLOD);
+  $(".setUr").click(setUr);
+  $(".setDg").click(setDg);
+  $(".setEdge").click(setEdge);
+  $(".setREP").click(setREP);
+  $(".setBonus").click(setBonus);
+  $(".setInvalid").click(setInvalid);
+  $(".setFly").click(setFly);
+  $(".setSpinV").click(setSpinV);
+  $(".setCOF").click(setCOF);
+  $(".setGOE button").click(setGOE);
+  elementDisplay = $("#elem-disp");
+  $(".clearEntry").click(clearEntry);
+  $(".addElement").click(addElement);
+  $(".delete").click(deleteElement);
 
 }
 
@@ -76,12 +79,13 @@ function setType(node){
     buffer.type = "seq";
     $("#nav-jmp-tab").addClass("disabled");
     $("#nav-sp-tab").addClass("disabled");
-    if (buffer.name == "ChSq"){
+  }
+  if (buffer.name == "ChSq"){
     $("#nav-seq .setLOD button").addClass("disabled");
     $("#nav-seq .setLOD button:eq(0)").removeClass("disabled");
     $("#nav-seq .setLOD button:eq(2)").removeClass("disabled");
-    }
   }
+
 
   //elementDisplay.append(buffer.type);
 }
@@ -91,7 +95,7 @@ function setLOD(){
   buffer.lod = $(this).html();
   setType(this);
   renderBufferedElement();
-//  elementDisplay.append(buffer.lod);
+  //  elementDisplay.append(buffer.lod);
 }
 
 function setUr(){
@@ -231,10 +235,43 @@ function renderBufferedElement(){
   }
   $("#goeDisplay").html(buffer.goe);
 }
-    //elementDisplay.html("test");
+//elementDisplay.html("test");
 
+function clearEntry() {
+  buffer = {
+    type: null,
+    name: null,
+    lod: null,
+    ur: false,
+    dg: false,
+    edge: false,
+    rep: false,
+    spinV: false,
+    fly: false,
+    cof: false,
+    bonus: false,
+    invalid: false,
+    goe: 0,
+    bv: null,
+    goeValue: null
+  };
 
+  renderBufferedElement();
+  $("#nav-jmp-tab").removeClass("disabled");
+  $("#nav-sp-tab").removeClass("disabled");
+  $("#nav-seq .setLOD button").removeClass("disabled");
+  $("#nav-seq-tab").removeClass("disabled");
+  $("#elem-disp").html("Element");
+  $("#goeDisplay").html("GOE");
+}
 
+function addElement(){
+  clearEntry();
+}
+
+function deleteElement(){
+  alert("Element deleted");
+}
 
 // function addText(){
 //   elementDisplay.append(this.innerHTML);
