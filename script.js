@@ -21,40 +21,57 @@ var checkSpin = /Sp/;
 var checkSeq = /Sq/;
 
 window.onload = function(){
-    //$("#nav-jmp button").click(addText);
-    $(".setName button").click(setName);
-    $(".setLOD button").click(setLOD);
-    $(".setUr").click(setUr);
-    $(".setDg").click(setDg);
-    $(".setEdge").click(setEdge);
-    $(".setREP").click(setREP);
-    $(".setBonus").click(setBonus);
-    $(".setInvalid").click(setInvalid);
-    $(".setFly").click(setFly);
-    $(".setSpinV").click(setSpinV);
-    $(".setCOF").click(setCOF);
-    $(".setGOE button").click(setGOE);
+  //$("#nav-jmp button").click(addText);
+  $(".setName button").click(setName);
+  $(".setLOD button").click(setLOD);
+  $(".setUr").click(setUr);
+  $(".setDg").click(setDg);
+  $(".setEdge").click(setEdge);
+  $(".setREP").click(setREP);
+  $(".setBonus").click(setBonus);
+  $(".setInvalid").click(setInvalid);
+  $(".setFly").click(setFly);
+  $(".setSpinV").click(setSpinV);
+  $(".setCOF").click(setCOF);
+  $(".setGOE button").click(setGOE);
 
 }
 
 function setName(){
   buffer.name = $(this).html();
   $("#elem-disp").html(buffer.name);
-  setType();
+  setType(this);
 }
 
-function setType(){
-  if (checkJump.test(buffer.name)){
-    buffer.type = "jump";
+// function setType(){
+//   if (checkJump.test(buffer.name)){
+//     buffer.type = "jump";
+//   }
+//   else if (checkSpin.test(buffer.name)){
+//     buffer.type = "spin";
+//   }
+//   else {
+//     buffer.type = "seq";
+//   }
+//   $("#elem-disp").append(buffer.type);
+// }
+
+
+function setType(node){
+  if(buffer.type != null){
+    if ($(node).parents().hasClass(".nav-jmp")){
+      buffer.type = "jump";
+    }
+    else if ($(node).parents().hasClass(".nav-sp")){
+      buffer.type = "spin";
+    }
+    else {
+      buffer.type = "seq";
+    }
+    $("#elem-disp").append(buffer.type);
   }
-  else if (checkSpin.test(buffer.name)){
-    buffer.type = "spin";
-  }
-  else {
-    buffer.type = "seq";
-  }
-  $("#elem-disp").append(buffer.type);
 }
+
 
 function setLOD(){
   buffer.lod = $(this).html();
@@ -114,9 +131,17 @@ function setGOE(){
 }
 
 function renderElementSelector(){
+  if(buffer.type === "jump"){
 
+  }
+  else if(buffer.type === "spin"){
+
+  }
+  else {
+
+  }
 }
-    //$("#elem-disp").html("test");
+//$("#elem-disp").html("test");
 
 
 
