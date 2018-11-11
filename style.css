@@ -6,13 +6,19 @@ div {
 #elem-disp-div {
   border: 1px solid black;
   height: 50px;
-}
-
-#elem-disp{
   font-size: 1.8em;
   text-align: center;
 }
 
+#elem-disp{
+  width: 80%;
+}
+
 body {
   padding: 10px;
+}
+
+#goeDisplay{
+  width: 20%;
+  float: right;
 }
