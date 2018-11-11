@@ -13,7 +13,7 @@
 <body>
   <h1>Figure Skating Score Calculator</h1>
 
-  <div class="container-fluid m-0">
+  <div class="container-fluid m-0 p-0">
     <div class="row">
       <div class="col-md-4">
         <h5>Selected element</h5>
@@ -31,7 +31,7 @@
           <div class="tab-pane fade show active" id="nav-jmp" role="tabpanel" aria-labelledby="nav-jmp-tab">
             <h3>Add Jump</h3>
             <h6>Type</h6>
-            <div class="btn-group">
+            <div class="btn-group setName">
               <button type="button" class="btn btn-outline-primary">A</button>
               <button type="button" class="btn btn-outline-primary">T</button>
               <button type="button" class="btn btn-outline-primary">S</button>
@@ -42,7 +42,7 @@
             </div>
 
             <h6>Rotations</h6>
-            <div class="btn-group">
+            <div class="btn-group setLOD">
               <button type="button" class="btn btn-outline-primary">0</button>
               <button type="button" class="btn btn-outline-primary">1</button>
               <button type="button" class="btn btn-outline-primary">2</button>
@@ -52,12 +52,12 @@
 
             <h6>Info</h6>
             <div class="btn-group">
-              <button type="button" class="btn btn-outline-primary">&lt;</button>
-              <button type="button" class="btn btn-outline-primary">&lt;&lt;</button>
-              <button type="button" class="btn btn-outline-primary">e</button>
-              <button type="button" class="btn btn-outline-primary">+REP</button>
-              <button type="button" class="btn btn-outline-primary">x</button>
-              <button type="button" class="btn btn-outline-primary">*</button>
+              <button type="button" class="btn btn-outline-primary setUr">&lt;</button>
+              <button type="button" class="btn btn-outline-primary setDg">&lt;&lt;</button>
+              <button type="button" class="btn btn-outline-primary setEdge">e</button>
+              <button type="button" class="btn btn-outline-primary setREP">+REP</button>
+              <button type="button" class="btn btn-outline-primary setBonus">x</button>
+              <button type="button" class="btn btn-outline-primary setInvalid">*</button>
             </div>
 
 
@@ -65,7 +65,7 @@
           <div class="tab-pane fade" id="nav-sp" role="tabpanel" aria-labelledby="nav-sp-tab">
             <h3>Add Spin</h3>
             <h6>Type</h6>
-            <div class="btn-group">
+            <div class="btn-group setName">
               <button type="button" class="btn btn-outline-dark">USp</button>
               <button type="button" class="btn btn-outline-dark">LSp</button>
               <button type="button" class="btn btn-outline-dark">CSp</button>
@@ -74,7 +74,7 @@
 
             </div>
             <h6>Level</h6>
-            <div class="btn-group">
+            <div class="btn-group setLOD">
               <button type="button" class="btn btn-outline-dark">0</button>
               <button type="button" class="btn btn-outline-dark">B</button>
               <button type="button" class="btn btn-outline-dark">1</button>
@@ -85,10 +85,10 @@
 
             <h6>Info</h6>
             <div class="btn-group">
-              <button type="button" class="btn btn-outline-dark">F</button>
-              <button type="button" class="btn btn-outline-dark">C</button>
-              <button type="button" class="btn btn-outline-dark">V</button>
-              <button type="button" class="btn btn-outline-dark">*</button>
+              <button type="button" class="btn btn-outline-dark setFly">F</button>
+              <button type="button" class="btn btn-outline-dark setCOF">C</button>
+              <button type="button" class="btn btn-outline-dark setSpinV">V</button>
+              <button type="button" class="btn btn-outline-dark setInvalid">*</button>
             </div>
 
           </div>
@@ -97,13 +97,13 @@
             <h3>Add Sequence</h3>
 
             <h6>Type</h6>
-            <div class="btn-group">
+            <div class="btn-group setName">
               <button type="button" class="btn btn-outline-info">StSq</button>
               <button type="button" class="btn btn-outline-info">ChSq</button>
             </div>
 
             <h6>Level</h6>
-            <div class="btn-group">
+            <div class="btn-group setLOD">
               <button type="button" class="btn btn-outline-info">0</button>
               <button type="button" class="btn btn-outline-info">B</button>
               <button type="button" class="btn btn-outline-info">1</button>
@@ -114,7 +114,7 @@
 
             <h6>Info</h6>
             <div class="btn-group">
-              <button type="button" class="btn btn-outline-info">*</button>
+              <button type="button" class="btn btn-outline-info setInvalid">*</button>
             </div>
 
 
@@ -123,7 +123,7 @@
 
           <div id="goe-sel">
             <h6>GOE</h6>
-            <div class="btn-toolbar" role="toolbar" aria-label="GOE Selector">
+            <div class="btn-toolbar setGOE" role="toolbar" aria-label="GOE Selector">
               <div class="btn-group pr-2" role="group" aria-label="pos GOE">
                 <button type="button" class="btn btn-danger">-5</button>
                 <button type="button" class="btn btn-outline-danger">-4</button>
@@ -149,8 +149,8 @@
 
           </div>
           <div>
-            <button type="button" class="btn btn-outline-danger">Clear Entry</button>
-            <button type="button" class="btn btn-outline-success">Add Element</button>
+            <button type="button" class="btn btn-outline-danger clearEntry">Clear Entry</button>
+            <button type="button" class="btn btn-outline-success addElement">Add Element</button>
           </div>
         </div>
       </div>

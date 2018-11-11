@@ -12,3 +12,7 @@ div {
   font-size: 1.8em;
   text-align: center;
 }
+
+body {
+  padding: 10px;
+}
