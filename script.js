@@ -1,4 +1,4 @@
-var buffer = {
+var buffer = [{
   type: null,
   name: null,
   lod: null,
@@ -14,16 +14,11 @@ var buffer = {
   goe: 0,
   bv: null,
   goeValue: null
-};
-
-var checkJump = /A$|T$|S$|Lo$|F$|Lz$|Eu$/;
-var checkSpin = /Sp/;
-var checkSeq = /Sq/;
+}];
 
 var elementDisplay;
 
 window.onload = function(){
-  //$("#nav-jmp button").click(addText);
   $(".setName button").click(setName);
   $(".setLOD button").click(setLOD);
   $(".setUr").click(setUr);
@@ -40,205 +35,206 @@ window.onload = function(){
   $(".clearEntry").click(clearEntry);
   $(".addElement").click(addElement);
   $(".delete").click(deleteElement);
+  $(".addJump").click(addJump);
+
 
 }
 
 function setName(){
-  buffer.name = $(this).html();
-  elementDisplay.html(buffer.name);
+  buffer[buffer.length - 1].name = $(this).html();
+  elementDisplay.html(buffer[buffer.length - 1].name);
   setType(this);
   renderBufferedElement();
 }
 
-// function setType(){
-//   if (checkJump.test(buffer.name)){
-//     buffer.type = "jump";
-//   }
-//   else if (checkSpin.test(buffer.name)){
-//     buffer.type = "spin";
-//   }
-//   else {
-//     buffer.type = "seq";
-//   }
-//   elementDisplay.append(buffer.type);
-// }
-
-
 function setType(node){
   if ($(node).parents(".nav-jmp").length){
-    buffer.type = "jump";
+    buffer[buffer.length - 1].type = "jump";
     $("#nav-sp-tab").addClass("disabled");
     $("#nav-seq-tab").addClass("disabled");
   }
   else if ($(node).parents(".nav-sp").length){
-    buffer.type = "spin";
+    buffer[buffer.length - 1].type = "spin";
     $("#nav-jmp-tab").addClass("disabled");
     $("#nav-seq-tab").addClass("disabled");
   }
   else {
-    buffer.type = "seq";
+    buffer[buffer.length - 1].type = "seq";
     $("#nav-jmp-tab").addClass("disabled");
     $("#nav-sp-tab").addClass("disabled");
   }
-  if (buffer.name == "ChSq"){
+  if (buffer[buffer.length - 1].name == "ChSq"){
     $("#nav-seq .setLOD button").addClass("disabled");
     $("#nav-seq .setLOD button:eq(0)").removeClass("disabled");
     $("#nav-seq .setLOD button:eq(2)").removeClass("disabled");
   }
-
-
-  //elementDisplay.append(buffer.type);
 }
 
 
 function setLOD(){
-  buffer.lod = $(this).html();
+  buffer[buffer.length - 1].lod = $(this).html();
   setType(this);
   renderBufferedElement();
-  //  elementDisplay.append(buffer.lod);
 }
 
 function setUr(){
-  buffer.ur = !buffer.ur;
-  buffer.dg = false;
-  //elementDisplay.append("<");
+  buffer[buffer.length - 1].ur = !buffer[buffer.length - 1].ur;
+  buffer[buffer.length - 1].dg = false;
   setType(this);
   renderBufferedElement();
 }
 
 function setDg(){
-  buffer.dg = !buffer.dg;
+  buffer[buffer.length - 1].dg = !buffer[buffer.length - 1].dg;
   //elementDisplay.append("<<");
-  buffer.ur = false;
+  buffer[buffer.length - 1].ur = false;
   setType(this);
   renderBufferedElement();
 }
 
 function setEdge(){
-  buffer.edge = !buffer.edge;
-  //elementDisplay.append("e");
+  buffer[buffer.length - 1].edge = !buffer[buffer.length - 1].edge;
   setType(this);
   renderBufferedElement();
 }
 
 
 function setREP(){
-  buffer.rep = !buffer.rep;
-  //elementDisplay.append("+REP");
+  buffer[buffer.length - 1].rep = !buffer[buffer.length - 1].rep;
   setType(this);
   renderBufferedElement();
 }
 
 function setBonus(){
-  buffer.bonus = !buffer.bonus;
-  //elementDisplay.append("x");
+  buffer[buffer.length - 1].bonus = !buffer[buffer.length - 1].bonus;
   setType(this);
   renderBufferedElement();
 }
 
 function setInvalid(){
-  buffer.invalid = !buffer.invalid;
-  //elementDisplay.append("*");
+  buffer[buffer.length - 1].invalid = !buffer[buffer.length - 1].invalid;
   setType(this);
   renderBufferedElement();
 }
 
 function setFly(){
-  buffer.fly = !buffer.fly;
-  //elementDisplay.append("F");
+  buffer[buffer.length - 1].fly = !buffer[buffer.length - 1].fly;
   setType(this);
   renderBufferedElement();
 }
 
 function setSpinV(){
-  buffer.spinV = !buffer.spinV;
-  //lementDisplay.append("V");
+  buffer[buffer.length - 1].spinV = !buffer[buffer.length - 1].spinV;
   setType(this);
   renderBufferedElement();
 }
 
 function setCOF(){
-  buffer.cof = !buffer.cof;
-  //elementDisplay.append("Co");
+  buffer[buffer.length - 1].cof = !buffer[buffer.length - 1].cof;
   setType(this);
   renderBufferedElement();
 }
 
 function setGOE(){
-  buffer.goe = parseInt($(this).html());
-  //elementDisplay.append(buffer.goe);
-  //setType(this);
+  buffer[0].goe = parseInt($(this).html());
   renderBufferedElement();
+}
+
+function addJump(){
+  buffer.push({
+    type: null,
+    name: null,
+    lod: null,
+    ur: false,
+    dg: false,
+    edge: false,
+    rep: false,
+    spinV: false,
+    fly: false,
+    cof: false,
+    bonus: false,
+    invalid: false,
+    bv: null,
+    goeValue: null
+  });
+  elementDisplay.append("+");
 }
 
 function renderBufferedElement(){
   elementDisplay.html("");
-  if(buffer.type === "jump"){
-    if (buffer.lod != null && buffer.lod != 0){
-      elementDisplay.append(buffer.lod);
-    }
-    if (buffer.name !== null){
-      elementDisplay.append(buffer.name);
-    }
-    if (buffer.edge !== false){
-      elementDisplay.append("e");
-    }
-    if (buffer.ur !== false){
-      elementDisplay.append("<");
-    }
-    if (buffer.dg !== false){
-      elementDisplay.append("<<");
-    }
-    if (buffer.invalid !== false){
-      elementDisplay.append("*");
-    }
 
-    if (buffer.rep !== false){
-      elementDisplay.append("+REP");
-    }
+  for (var i = 0; i < buffer.length; i++){
+    if(buffer[i].type === "jump"){
+      if (buffer[i].lod != null && buffer[i].lod != 0){
+        elementDisplay.append(buffer[i].lod);
+      }
+      if (buffer[i].name !== null){
+        elementDisplay.append(buffer[i].name);
+      }
+      if (buffer[i].edge !== false){
+        elementDisplay.append("e");
+      }
+      if (buffer[i].ur !== false){
+        elementDisplay.append("<");
+      }
+      if (buffer[i].dg !== false){
+        elementDisplay.append("<<");
+      }
+      if (buffer[i].invalid !== false){
+        elementDisplay.append("*");
+      }
 
-    if (buffer.bonus !== false){
-      elementDisplay.append(" x");
-    }
+      if (buffer[i].rep !== false){
+        elementDisplay.append("+REP");
+      }
 
+      if (buffer[i].bonus !== false){
+        elementDisplay.append(" x");
+      }
+
+    }
+    else if(buffer[i].type === "spin"){
+      if (buffer[i].fly !== false){
+        elementDisplay.append("F");
+      }
+      if (buffer[i].cof !== false){
+        elementDisplay.append("C");
+      }
+      if (buffer[i].name !== null){
+        elementDisplay.append(buffer[i].name);
+      }
+      if (buffer[i].lod != null && buffer[i].lod != 0){
+        elementDisplay.append(buffer[i].lod);
+      }
+      if (buffer[i].spinV !== false){
+        elementDisplay.append("V");
+      }
+      if (buffer[i].invalid !== false){
+        elementDisplay.append("*");
+      }
+    }
+    else {
+      if (buffer[i].name !== null){
+        elementDisplay.append(buffer[i].name);
+      }
+      if (buffer[i].lod != null && buffer[i].lod != 0){
+        elementDisplay.append(buffer[i].lod);
+      }
+      if (buffer[i].invalid !== false){
+        elementDisplay.append("*");
+      }
+    }
+    if (i != buffer.length - 1){
+    elementDisplay.append("+");
   }
-  else if(buffer.type === "spin"){
-    if (buffer.fly !== false){
-      elementDisplay.append("F");
-    }
-    if (buffer.cof !== false){
-      elementDisplay.append("C");
-    }
-    if (buffer.name !== null){
-      elementDisplay.append(buffer.name);
-    }
-    if (buffer.lod != null && buffer.lod != 0){
-      elementDisplay.append(buffer.lod);
-    }
-    if (buffer.spinV !== false){
-      elementDisplay.append("V");
-    }
-    if (buffer.invalid !== false){
-      elementDisplay.append("*");
-    }
   }
-  else {
-    if (buffer.name !== null){
-      elementDisplay.append(buffer.name);
-    }
-    if (buffer.lod != null && buffer.lod != 0){
-      elementDisplay.append(buffer.lod);
-    }
-    if (buffer.invalid !== false){
-      elementDisplay.append("*");
-    }
-  }
-  $("#goeDisplay").html(buffer.goe);
+
+  $("#goeDisplay").html(buffer[0].goe);
 }
-//elementDisplay.html("test");
 
 function clearEntry() {
-  buffer = {
+  buffer.length = 0;
+  buffer.push({
     type: null,
     name: null,
     lod: null,
@@ -254,9 +250,10 @@ function clearEntry() {
     goe: 0,
     bv: null,
     goeValue: null
-  };
+  });
 
   renderBufferedElement();
+
   $("#nav-jmp-tab").removeClass("disabled");
   $("#nav-sp-tab").removeClass("disabled");
   $("#nav-seq .setLOD button").removeClass("disabled");
@@ -267,13 +264,13 @@ function clearEntry() {
 
 function addElement(){
   clearEntry();
+  calculateBuffer();
 }
 
 function deleteElement(){
   alert("Element deleted");
 }
 
-// function addText(){
-//   elementDisplay.append(this.innerHTML);
-//
-// }
+function calculateBuffer(){
+
+}
