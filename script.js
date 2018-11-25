@@ -1,7 +1,7 @@
 var buffer = [{
   type: null,
   name: null,
-  lod: null,
+  lod: "0",
   ur: false,
   dg: false,
   edge: false,
@@ -12,13 +12,18 @@ var buffer = [{
   bonus: false,
   invalid: false,
   goe: 0,
-  bv: null,
-  goeValue: null
+  bv: 0.0,
+  goeValue: 0.0,
+  bvGOECalc: 0.0,
+  bs: 0.0,
+  elemScore: 0.0
 }];
 
 var elementDisplay;
+var numElementsInTable = 0;
 
 window.onload = function(){
+  elementDisplay = $("#elem-disp");
   $(".setName button").click(setName);
   $(".setLOD button").click(setLOD);
   $(".setUr").click(setUr);
@@ -31,23 +36,23 @@ window.onload = function(){
   $(".setSpinV").click(setSpinV);
   $(".setCOF").click(setCOF);
   $(".setGOE button").click(setGOE);
-  elementDisplay = $("#elem-disp");
   $(".clearEntry").click(clearEntry);
   $(".addElement").click(addElement);
-  $(".delete").click(deleteElement);
+  //$(".delete").click(deleteElement);
   $(".addJump").click(addJump);
-
-
 }
 
 function setName(){
   buffer[buffer.length - 1].name = $(this).html();
-  elementDisplay.html(buffer[buffer.length - 1].name);
+  //elementDisplay.html(buffer[buffer.length - 1].name);
   setType(this);
   renderBufferedElement();
 }
 
 function setType(node){
+  $("#nav-jmp .setLOD button").prop("disabled", false);
+  $("#nav-seq .setLOD button").prop("disabled", false);
+  $(".addElement").prop("disabled", false);
   if ($(node).parents(".nav-jmp").length){
     buffer[buffer.length - 1].type = "jump";
     $("#nav-sp-tab").addClass("disabled");
@@ -64,9 +69,21 @@ function setType(node){
     $("#nav-sp-tab").addClass("disabled");
   }
   if (buffer[buffer.length - 1].name == "ChSq"){
-    $("#nav-seq .setLOD button").addClass("disabled");
-    $("#nav-seq .setLOD button:eq(0)").removeClass("disabled");
-    $("#nav-seq .setLOD button:eq(2)").removeClass("disabled");
+    $("#nav-seq .setLOD button").prop("disabled", true);
+    $("#nav-seq .setLOD button:eq(0)").prop("disabled", false);
+    $("#nav-seq .setLOD button:eq(2)").prop("disabled", false);
+  }
+  if (buffer[buffer.length - 1].name == "Eu"){
+    $("#nav-jmp .setLOD button").prop("disabled", true);
+    $("#nav-jmp .setLOD button:eq(0)").prop("disabled", false);
+    $("#nav-jmp .setLOD button:eq(1)").prop("disabled", false);
+  }
+
+  if (buffer[buffer.length - 1].name === "ChSq" || buffer[buffer.length - 1].name === "Eu"){
+    if(buffer[buffer.length - 1].lod != "0" && buffer[buffer.length - 1].lod != "1" ){
+      $(".addElement").prop("disabled", true);
+    }
+    //disable add element button
   }
 }
 
@@ -144,7 +161,7 @@ function addJump(){
   buffer.push({
     type: null,
     name: null,
-    lod: null,
+    lod: "0",
     ur: false,
     dg: false,
     edge: false,
@@ -154,8 +171,11 @@ function addJump(){
     cof: false,
     bonus: false,
     invalid: false,
-    bv: null,
-    goeValue: null
+    bv: 0.0,
+    goeValue: 0.0,
+    bvGOECalc: 0.0,
+    bs: 0.0,
+    elemScore: 0.0
   });
   elementDisplay.append("+");
 }
@@ -225,8 +245,8 @@ function renderBufferedElement(){
       }
     }
     if (i != buffer.length - 1){
-    elementDisplay.append("+");
-  }
+      elementDisplay.append("+");
+    }
   }
 
   $("#goeDisplay").html(buffer[0].goe);
@@ -237,7 +257,7 @@ function clearEntry() {
   buffer.push({
     type: null,
     name: null,
-    lod: null,
+    lod: "0",
     ur: false,
     dg: false,
     edge: false,
@@ -248,29 +268,146 @@ function clearEntry() {
     bonus: false,
     invalid: false,
     goe: 0,
-    bv: null,
-    goeValue: null
+    bv: 0.0,
+    goeValue: 0.0,
+    bvGOECalc: 0.0,
+    bs: 0.0,
+    elemScore: 0.0
   });
 
   renderBufferedElement();
 
-  $("#nav-jmp-tab").removeClass("disabled");
-  $("#nav-sp-tab").removeClass("disabled");
-  $("#nav-seq .setLOD button").removeClass("disabled");
-  $("#nav-seq-tab").removeClass("disabled");
+  // $("#nav-jmp-tab").removeClass("disabled");
+  // $("#nav-sp-tab").removeClass("disabled");
+  // $("#nav-seq .setLOD button").removeClass("disabled");
+  // $("#nav-seq-tab").removeClass("disabled");
   $("#elem-disp").html("Element");
   $("#goeDisplay").html("GOE");
+  setType();
 }
 
 function addElement(){
-  clearEntry();
   calculateBuffer();
+  numElementsInTable++;
+  appendToTable();
+  calculateTotalScore();
+  clearEntry();
+
 }
 
-function deleteElement(){
-  alert("Element deleted");
-}
+// function deleteElement(){
+//   alert("Element deleted");
+// }
 
 function calculateBuffer(){
+  for (var i = 0; i < buffer.length; i++){
+    if (buffer[i].invalid === true){
+      buffer[i].bv = 0.00;
+    }
+    else if (buffer[i].type === "jump"){
+      if (buffer[i].dg === true && parseInt(buffer[0].lod) != 0){
+        buffer[i].bv = basevalues[buffer[0].name][parseInt(buffer[0].lod) - 1];
+      }
+      buffer[i].bv = basevalues[buffer[0].name][buffer[0].lod];
+    }
+    else if (buffer[i].type === "seq"){
+      buffer[i].bv = basevalues[buffer[0].name][buffer[0].lod];
+    }
+    else{
+      if (buffer[i].cof === true){
+        buffer[i].bv = basevalues[buffer[0].name]["C" + buffer[0].lod];
+      }
+      else if (buffer[i].fly === true){
+        buffer[i].bv = basevalues[buffer[0].name]["F" + buffer[0].lod];
+      }
+      else{
+        buffer[i].bv = basevalues[buffer[0].name][buffer[0].lod];
+      }
+    }
+    //
 
+    buffer[i].bs = buffer[i].bv;
+    if (buffer[i].bonus === true){
+      buffer[i].bs *= 1.1;
+    }
+    if (buffer[i].rep === true){
+      buffer[i].bs *= 0.7;
+    }
+
+    //GOE Caculation
+
+    if (buffer[i].name !== "ChSq"){
+      if (buffer[i].ur === true && buffer[i].edge === true){
+        buffer[i].bvGOECalc =  buffer[i].bv * 0.6;
+      }
+      else if(buffer[i].ur === true || buffer[i].edge === true || buffer[i].spinV === true){
+        buffer[i].bvGOECalc =  buffer[i].bv * 0.75;
+
+      }
+      else{
+        buffer[i].bvGOECalc =  buffer[i].bv;
+      }
+
+      if (buffer[i].goe != 0){
+        buffer[i].goeValue = buffer[i].bvGOECalc * (buffer[i].goe/10);
+      }
+    }
+    else{
+      buffer[i].bvGOECalc =  buffer[i].bv;
+      buffer[i].goeValue =  buffer[i].goe * 0.5;
+    }
+
+
+
+    buffer[i].elemScore = Math.round((buffer[i].bs + buffer[i].goeValue)*100)/100
+  }
+
+}
+
+//console.log("The bv of " + buffer[0].name + buffer[0].lod + " is " + basevalues["F"+buffer[0].name][buffer[0].lod]);
+
+
+function appendToTable(){
+  var totalBV = 0;
+  var totalGOEValue = 0;
+  var totalScore = 0;
+  var row = "";
+
+  for (var i = 0; i < buffer.length; i++){
+    totalBV += buffer[i].bs;
+    totalGOEValue += buffer[i].goeValue;
+    totalScore += buffer[i].elemScore;
+  }
+
+
+  row = "<tr>";
+  row += "<td class=\"numElem\">" + numElementsInTable + "</td>";
+  row += "<td>" + elementDisplay.html() + "</td>";
+  row += "<td>" + Math.round(totalBV * 100)/100 + "</td>";
+  row += "<td>" + buffer[0].goe + "</td>";
+  row += "<td>" + Math.round(totalGOEValue * 100)/100 + "</td>";
+  row += "<td class=\"elemScore\">" + Math.round(totalScore * 100)/100 + "</td>";
+  row += "<td><i class=\"delete far fa-trash-alt\"></i></td>";
+  row += "</tr>";
+  console.log(row);
+  $(".displayTable").append(row);
+  $(".delete").click(remove);
+}
+
+function remove(){
+  $(this).parent().parent().remove();
+  numElementsInTable = 0;
+  for (var i = 0; i < $(".numElem").length; i++){
+    $(".numElem").eq(i).html(i + 1);
+    numElementsInTable++;
+  }
+  calculateTotalScore();
+}
+
+function calculateTotalScore(){
+  var totalScore = 0;
+  for (var i = 0; i < $(".elemScore").length; i++){
+    totalScore += parseFloat($(".elemScore").eq(i).html());
+  }
+  $("#tes").html(totalScore);
 }
