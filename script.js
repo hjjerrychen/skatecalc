@@ -330,24 +330,24 @@ function calculateBuffer(){
     }
     else if (buffer[i].type === "jump"){
       if (buffer[i].dg === true && parseInt(buffer[i].lod) != "0"){
-        buffer[i].bv = basevalues[buffer[0].name][parseInt(buffer[0].lod) - 1];
+        buffer[i].bv = basevalues[buffer[i].name][parseInt(buffer[i].lod) - 1];
       }
       else{
-        buffer[i].bv = basevalues[buffer[0].name][buffer[0].lod];
+        buffer[i].bv = basevalues[buffer[i].name][buffer[i].lod];
       }
     }
     else if (buffer[i].type === "seq"){
-      buffer[i].bv = basevalues[buffer[0].name][buffer[0].lod];
+      buffer[i].bv = basevalues[buffer[i].name][buffer[i].lod];
     }
     else{
       if (buffer[i].cof === true){
-        buffer[i].bv = basevalues[buffer[0].name]["C" + buffer[0].lod];
+        buffer[i].bv = basevalues[buffer[i].name]["C" + buffer[i].lod];
       }
       else if (buffer[i].fly === true){
-        buffer[i].bv = basevalues[buffer[0].name]["F" + buffer[0].lod];
+        buffer[i].bv = basevalues[buffer[i].name]["F" + buffer[i].lod];
       }
       else{
-        buffer[i].bv = basevalues[buffer[0].name][buffer[0].lod];
+        buffer[i].bv = basevalues[buffer[i].name][buffer[i].lod];
       }
     }
     //base score calculation
