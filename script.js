@@ -318,7 +318,7 @@ function addElement(){
   numElementsInTable++;
   appendToTable();
   calculateTotalScore();
-  //clearEntry();
+  clearEntry();
 }
 
 function calculateBuffer(){
