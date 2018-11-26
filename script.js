@@ -363,8 +363,7 @@ function calculateBuffer(){
     }
     else if(buffer[i].ur === true || buffer[i].edge === true || buffer[i].spinV === true){
       buffer[i].bs *= 0.75;
-
-    }
+}
 
     //GOE Caculation
 
