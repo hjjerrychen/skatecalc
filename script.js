@@ -200,6 +200,7 @@ function addJump(){
     elemScore: 0.0
   });
   elementDisplay.append("+");
+  $("#nav-jmp .setLOD button").prop("disabled", false);
 }
 
 function renderBufferedElement(){
