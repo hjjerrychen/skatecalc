@@ -382,7 +382,8 @@ function calculateBuffer(){
       }
 
       if (buffer[0].goe != 0){
-        buffer[i].goeValue = buffer[i].bvGOECalc * (buffer[0].goe/10);
+        buffer[i].bvGOECalc = Math.round(buffer[i].bvGOECalc*100)/100
+        buffer[i].goeValue = buffer[i].bvGOECalc * (buffer[0].goe*0.1);
       }
     }
     else{
@@ -390,6 +391,7 @@ function calculateBuffer(){
       buffer[i].goeValue =  buffer[0].goe * 0.5;
     }
 
+    buffer[i].goeValue =   Math.round(buffer[i].goeValue*100)/100;
 
 
     buffer[i].elemScore = Math.round((buffer[i].bs + buffer[i].goeValue)*100)/100
