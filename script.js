@@ -55,8 +55,10 @@ function setName(){
 }
 
 function setType(node){
+
   $("#nav-jmp .setLOD button").prop("disabled", false);
   $("#nav-seq .setLOD button").prop("disabled", false);
+  $("#nav-sp .setLOD button").prop("disabled", false);
   $(".addElement").prop("disabled", false);
   $(".addJump").prop("disabled", false);
   $(".setEdge").prop("disabled", true);
@@ -105,6 +107,8 @@ function setType(node){
     }
   }
 }
+
+
 
 
 function setLOD(){
@@ -293,13 +297,20 @@ function clearEntry() {
     elemScore: 0.0
   });
 
-  renderBufferedElement();
+  numElementsInTable=0;
 
-  $("#elem-disp").html("Element");
-  $("#goeDisplay").html("GOE");
+  renderBufferedElement();
+  $("#nav-jmp .setLOD button").prop("disabled", false);
+  $("#nav-seq .setLOD button").prop("disabled", false);
+  $("#nav-sp .setLOD button").prop("disabled", false);
+  $("#nav-sp-tab").removeClass("disabled");
+  $("#nav-jmp-tab").removeClass("disabled");
+  $("#nav-seq-tab").removeClass("disabled");
   $(".addElement").prop("disabled", true);
   $(".addJump").prop("disabled", true);
   $(".setEdge").prop("disabled", true);
+  $("#elem-disp").html("Element");
+  $("#goeDisplay").html("GOE");
 
   //setType();
 }
