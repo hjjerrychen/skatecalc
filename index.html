@@ -6,11 +6,11 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115566042-2"></script>
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-    gtag('config', 'UA-115566042-2');
+  gtag('config', 'UA-115566042-2');
   </script>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -40,6 +40,8 @@
             <a class="nav-item nav-link active" id="nav-jmp-tab" data-toggle="tab" href="#nav-jmp" role="tab" aria-controls="nav-jmp" aria-selected="true">Jumps</a>
             <a class="nav-item nav-link" id="nav-sp-tab" data-toggle="tab" href="#nav-sp" role="tab" aria-controls="nav-sp" aria-selected="false">Spins</a>
             <a class="nav-item nav-link" id="nav-seq-tab" data-toggle="tab" href="#nav-seq" role="tab" aria-controls="nav-seq" aria-selected="false">Sequences</a>
+            <a class="nav-item nav-link" id="nav-pcs-tab" data-toggle="tab" href="#nav-pcs" role="tab" aria-controls="nav-pcs" aria-selected="false">Program Components</a>
+
           </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
@@ -76,6 +78,37 @@
               <button type="button" class="btn btn-outline-primary setInvalid">*</button>
             </div>
 
+            <div class="goe-sel">
+              <h6>GOE</h6>
+              <div class="btn-toolbar setGOE" role="toolbar" aria-label="GOE Selector">
+                <div class="btn-group pr-2" role="group" aria-label="pos GOE">
+                  <button type="button" class="btn btn-danger">-5</button>
+                  <button type="button" class="btn btn-outline-danger">-4</button>
+                  <button type="button" class="btn btn-outline-danger">-3</button>
+                  <button type="button" class="btn btn-outline-danger">-2</button>
+                  <button type="button" class="btn btn-outline-danger">-1</button>
+
+                </div>
+                <div class="btn-group" role="group" aria-label="zero GOE">
+                  <button type="button" class="btn btn-dark">0</button>
+                </div>
+                <div class="btn-group pl-2" role="group" aria-label="neg GOE">
+
+                  <button type="button" class="btn btn-outline-success">1</button>
+                  <button type="button" class="btn btn-outline-success">2</button>
+                  <button type="button" class="btn btn-outline-success">3</button>
+                  <button type="button" class="btn btn-outline-success">4</button>
+                  <button type="button" class="btn btn-success">5</button>
+
+                </div>
+
+              </div>
+
+            </div>
+            <div>
+              <button type="button" class="btn btn-outline-danger clearEntry">Clear Entry</button>
+              <button type="button" class="btn btn-outline-success addElement">Add Element</button>
+            </div>
 
           </div>
           <div class="tab-pane fade nav-sp" id="nav-sp" role="tabpanel" aria-labelledby="nav-sp-tab">
@@ -107,6 +140,37 @@
               <button type="button" class="btn btn-outline-dark setInvalid">*</button>
             </div>
 
+            <div class="goe-sel">
+              <h6>GOE</h6>
+              <div class="btn-toolbar setGOE" role="toolbar" aria-label="GOE Selector">
+                <div class="btn-group pr-2" role="group" aria-label="pos GOE">
+                  <button type="button" class="btn btn-danger">-5</button>
+                  <button type="button" class="btn btn-outline-danger">-4</button>
+                  <button type="button" class="btn btn-outline-danger">-3</button>
+                  <button type="button" class="btn btn-outline-danger">-2</button>
+                  <button type="button" class="btn btn-outline-danger">-1</button>
+
+                </div>
+                <div class="btn-group" role="group" aria-label="zero GOE">
+                  <button type="button" class="btn btn-dark">0</button>
+                </div>
+                <div class="btn-group pl-2" role="group" aria-label="neg GOE">
+
+                  <button type="button" class="btn btn-outline-success">1</button>
+                  <button type="button" class="btn btn-outline-success">2</button>
+                  <button type="button" class="btn btn-outline-success">3</button>
+                  <button type="button" class="btn btn-outline-success">4</button>
+                  <button type="button" class="btn btn-success">5</button>
+
+                </div>
+
+              </div>
+
+            </div>
+            <div>
+              <button type="button" class="btn btn-outline-danger clearEntry">Clear Entry</button>
+              <button type="button" class="btn btn-outline-success addElement">Add Element</button>
+            </div>
           </div>
 
           <div class="tab-pane fade nav-seq" id="nav-seq" role="tabpanel" aria-labelledby="nav-seq-tab">
@@ -132,42 +196,51 @@
             <div class="btn-group">
               <button type="button" class="btn btn-outline-info setInvalid">*</button>
             </div>
+            <div class="goe-sel">
+              <h6>GOE</h6>
+              <div class="btn-toolbar setGOE" role="toolbar" aria-label="GOE Selector">
+                <div class="btn-group pr-2" role="group" aria-label="pos GOE">
+                  <button type="button" class="btn btn-danger">-5</button>
+                  <button type="button" class="btn btn-outline-danger">-4</button>
+                  <button type="button" class="btn btn-outline-danger">-3</button>
+                  <button type="button" class="btn btn-outline-danger">-2</button>
+                  <button type="button" class="btn btn-outline-danger">-1</button>
 
+                </div>
+                <div class="btn-group" role="group" aria-label="zero GOE">
+                  <button type="button" class="btn btn-dark">0</button>
+                </div>
+                <div class="btn-group pl-2" role="group" aria-label="neg GOE">
 
-          </div>
+                  <button type="button" class="btn btn-outline-success">1</button>
+                  <button type="button" class="btn btn-outline-success">2</button>
+                  <button type="button" class="btn btn-outline-success">3</button>
+                  <button type="button" class="btn btn-outline-success">4</button>
+                  <button type="button" class="btn btn-success">5</button>
 
-
-          <div id="goe-sel">
-            <h6>GOE</h6>
-            <div class="btn-toolbar setGOE" role="toolbar" aria-label="GOE Selector">
-              <div class="btn-group pr-2" role="group" aria-label="pos GOE">
-                <button type="button" class="btn btn-danger">-5</button>
-                <button type="button" class="btn btn-outline-danger">-4</button>
-                <button type="button" class="btn btn-outline-danger">-3</button>
-                <button type="button" class="btn btn-outline-danger">-2</button>
-                <button type="button" class="btn btn-outline-danger">-1</button>
-
-              </div>
-              <div class="btn-group" role="group" aria-label="zero GOE">
-                <button type="button" class="btn btn-dark">0</button>
-              </div>
-              <div class="btn-group pl-2" role="group" aria-label="neg GOE">
-
-                <button type="button" class="btn btn-outline-success">1</button>
-                <button type="button" class="btn btn-outline-success">2</button>
-                <button type="button" class="btn btn-outline-success">3</button>
-                <button type="button" class="btn btn-outline-success">4</button>
-                <button type="button" class="btn btn-success">5</button>
+                </div>
 
               </div>
 
             </div>
+            <div>
+              <button type="button" class="btn btn-outline-danger clearEntry">Clear Entry</button>
+              <button type="button" class="btn btn-outline-success addElement">Add Element</button>
+            </div>
 
           </div>
-          <div>
-            <button type="button" class="btn btn-outline-danger clearEntry">Clear Entry</button>
-            <button type="button" class="btn btn-outline-success addElement">Add Element</button>
+
+          <div class="tab-pane fade nav-pcs" id="nav-pcs" role="tabpanel" aria-labelledby="nav-pcs-tab">
+            <h3>Program Component Score</h3>
+            <h6>Factor</h6>
+            <h6>Skating Skills</h6>
+            <h6>Transition</h6>
+            <h6>Performance</h6>
+            <h6>Composition</h6>
+            <h6>Interpretation of the Music</h6>
           </div>
+
+
         </div>
       </div>
       <div class="col-md-6">
@@ -185,22 +258,23 @@
           </thead>
           <tbody class="displayTable">
             <!-- <tr>
-              <td>1</td>
-              <td>1A&lt;*</td>
-              <td>1.1</td>
-              <td>+4</td>
-              <td>0.5</td>
-              <td>1.6</td>
-              <td><i class="delete far fa-trash-alt"></i></td>
-            </tr> -->
-          </tbody>
-        </table>
-        <p id="tes-box"><span>Technical Element Score: </span><span id="tes"></span> </p>
-      </div>
+            <td>1</td>
+            <td>1A&lt;*</td>
+            <td>1.1</td>
+            <td>+4</td>
+            <td>0.5</td>
+            <td>1.6</td>
+            <td><i class="delete far fa-trash-alt"></i></td>
+          </tr> -->
+        </tbody>
+      </table>
+      <p id="tes-box"><span>Technical Element Score: </span><span id="tes"></span> </p>
     </div>
-
-<hr />
   </div>
+
+  <hr />
+  <p><small>Version 0.2 &centerdot;  Nov XX, 2018. Made by <a href="https://github.com/jerry70450/FSCalc">Jerry Chen.</a></small></p>
+</div>
 
 </body>
 </html>

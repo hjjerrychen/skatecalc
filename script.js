@@ -44,7 +44,7 @@ window.onload = function(){
   $(".addElement").prop("disabled", true);
   $(".addJump").prop("disabled", true);
   $(".setEdge").prop("disabled", true);
-
+  $(".setSpinV").prop("disabled", true);
 }
 
 function setName(){
@@ -55,7 +55,7 @@ function setName(){
 }
 
 function setType(node){
-
+  $(".setSpinV").prop("disabled", false);
   $("#nav-jmp .setLOD button").prop("disabled", false);
   $("#nav-seq .setLOD button").prop("disabled", false);
   $("#nav-sp .setLOD button").prop("disabled", false);
@@ -94,18 +94,27 @@ function setType(node){
     }
     //disable add element button
   }
-  if(buffer[0].name == null){
-    $(".addJump").prop("disabled", true);
+  // if(buffer[0].name == null){
+  //   $(".addJump").prop("disabled", true);
+  // }
+
+//disable v if
+  if (buffer[buffer.length - 1].cof != true && buffer[buffer.length - 1].fly != true){
+    $(".setSpinV").prop("disabled", true);
+  }
+  //disable set edge unless lz or flip
+  if(buffer[buffer.length - 1].name == "Lz" || buffer[buffer.length - 1].name == "F"){
+    $(".setEdge").prop("disabled", false);
+  }
+  if(buffer[buffer.length - 1].name == null){
+    $(".addElement").prop("disabled", true);
   }
 
-  for (var i = 0; i < buffer.length; i++){
-    if(buffer[i].name == null){
-      $(".addElement").prop("disabled", true);
-    }
-    if(buffer[i].name == "Lz" || buffer[i].name == "F"){
-      $(".setEdge").prop("disabled", false);
-    }
-  }
+  // for (var i = 0; i < buffer.length; i++){
+  //   if(buffer[i].name == null){
+  //     $(".addElement").prop("disabled", true);
+  //   }
+  // }
 }
 
 
@@ -200,6 +209,7 @@ function addJump(){
     elemScore: 0.0
   });
   elementDisplay.append("+");
+  $(".addJump").prop("disabled", true);
 }
 
 function renderBufferedElement(){
@@ -298,6 +308,7 @@ function clearEntry() {
   });
 
   renderBufferedElement();
+
   $("#nav-jmp .setLOD button").prop("disabled", false);
   $("#nav-seq .setLOD button").prop("disabled", false);
   $("#nav-sp .setLOD button").prop("disabled", false);
@@ -309,6 +320,8 @@ function clearEntry() {
   $(".setEdge").prop("disabled", true);
   $("#elem-disp").html("Element");
   $("#goeDisplay").html("GOE");
+  $(".setSpinV").prop("disabled", false);
+
 
   //setType();
 }
@@ -318,7 +331,7 @@ function addElement(){
   numElementsInTable++;
   appendToTable();
   calculateTotalScore();
-  //clearEntry();
+  clearEntry();
 }
 
 function calculateBuffer(){
