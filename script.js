@@ -297,8 +297,6 @@ function clearEntry() {
     elemScore: 0.0
   });
 
-  numElementsInTable=0;
-
   renderBufferedElement();
   $("#nav-jmp .setLOD button").prop("disabled", false);
   $("#nav-seq .setLOD button").prop("disabled", false);
