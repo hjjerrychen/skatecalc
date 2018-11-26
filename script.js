@@ -318,10 +318,11 @@ function addElement(){
   numElementsInTable++;
   appendToTable();
   calculateTotalScore();
-  clearEntry();
+  //clearEntry();
 }
 
 function calculateBuffer(){
+  var bufferBV=[0.0];
   for (var i = 0; i < buffer.length; i++){
     if (buffer[i].invalid === true){
       buffer[i].bv = 0.00;
@@ -373,28 +374,29 @@ function calculateBuffer(){
       }
       else if(buffer[i].ur === true || buffer[i].edge === true || buffer[i].spinV === true){
         buffer[i].bvGOECalc =  buffer[i].bv * 0.75;
-
       }
       else{
         buffer[i].bvGOECalc =  buffer[i].bv;
       }
-
-      if (buffer[0].goe != 0){
-        buffer[i].bvGOECalc = Math.round(buffer[i].bvGOECalc*100)/100
-        buffer[i].goeValue = buffer[i].bvGOECalc * (buffer[0].goe*0.1);
-      }
     }
     else{
       buffer[i].bvGOECalc =  buffer[i].bv;
-      buffer[i].goeValue =  buffer[0].goe * 0.5;
+      buffer[0].goeValue =  buffer[0].goe * 0.5;
     }
+    buffer[i].bvGOECalc = Math.round(buffer[i].bvGOECalc*100)/100;
+//console.log((buffer[i].bvGOECalc));
+    bufferBV.push(buffer[i].bvGOECalc);
+    //alert(buffer[i].bvGOECalc);
 
-    buffer[i].goeValue =   Math.round(buffer[i].goeValue*100)/100;
-
-
-    buffer[i].elemScore = Math.round((buffer[i].bs + buffer[i].goeValue)*100)/100
   }
-
+//console.log(bufferBV);
+//console.log(Math.max(bufferBV));
+  if (buffer[0].name !== "ChSq"){
+  if (buffer[0].goe != 0){
+    buffer[0].goeValue = Math.max(...bufferBV) * (buffer[0].goe*0.1);
+  }
+  buffer[0].goeValue =   Math.round(buffer[0].goeValue*100)/100;
+}
 }
 
 //console.log("The bv of " + buffer[0].name + buffer[0].lod + " is " + basevalues["F"+buffer[0].name][buffer[0].lod]);
@@ -402,27 +404,24 @@ function calculateBuffer(){
 
 function appendToTable(){
   var totalBV = 0;
-  var totalGOEValue = 0;
   var totalScore = 0;
   var row = "";
 
   for (var i = 0; i < buffer.length; i++){
     totalBV += buffer[i].bs;
-    totalGOEValue += buffer[i].goeValue;
-    totalScore += buffer[i].elemScore;
   }
-
+  totalScore = totalBV + buffer[0].goeValue;
 
   row = "<tr>";
   row += "<td class=\"numElem\">" + numElementsInTable + "</td>";
   row += "<td>" + elementDisplay.html() + "</td>";
   row += "<td>" + (Math.round(totalBV * 100)/100).toFixed(2) + "</td>";
   row += "<td>" + buffer[0].goe + "</td>";
-  row += "<td>" + (Math.round(totalGOEValue * 100)/100).toFixed(2) + "</td>";
+  row += "<td>" + (Math.round(buffer[0].goeValue*100)/100).toFixed(2) + "</td>";
   row += "<td class=\"elemScore\">" + (Math.round(totalScore * 100)/100).toFixed(2) + "</td>";
   row += "<td><i class=\"delete far fa-trash-alt\"></i></td>";
   row += "</tr>";
-  console.log(row);
+  //console.log(row);
   $(".displayTable").append(row);
   $(".delete").click(remove);
 }
