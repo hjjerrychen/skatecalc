@@ -309,7 +309,7 @@ function addElement(){
   numElementsInTable++;
   appendToTable();
   calculateTotalScore();
-  //clearEntry();
+  clearEntry();
 
 }
 
