@@ -40,7 +40,11 @@ window.onload = function(){
   $(".addElement").click(addElement);
   //$(".delete").click(deleteElement);
   $(".addJump").click(addJump);
-  setType();
+  //setType();
+  $(".addElement").prop("disabled", true);
+  $(".addJump").prop("disabled", true);
+  $(".setEdge").prop("disabled", true);
+
 }
 
 function setName(){
