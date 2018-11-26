@@ -40,6 +40,7 @@ window.onload = function(){
   $(".addElement").click(addElement);
   //$(".delete").click(deleteElement);
   $(".addJump").click(addJump);
+  setType();
 }
 
 function setName(){
@@ -53,6 +54,7 @@ function setType(node){
   $("#nav-jmp .setLOD button").prop("disabled", false);
   $("#nav-seq .setLOD button").prop("disabled", false);
   $(".addElement").prop("disabled", false);
+  $(".addJump").prop("disabled", false);
   if ($(node).parents(".nav-jmp").length){
     buffer[buffer.length - 1].type = "jump";
     $("#nav-sp-tab").addClass("disabled");
@@ -84,6 +86,15 @@ function setType(node){
       $(".addElement").prop("disabled", true);
     }
     //disable add element button
+  }
+  if(buffer[0].name == null){
+    $(".addJump").prop("disabled", true);
+  }
+
+  for (var i = 0; i < buffer.length; i++){
+    if(buffer[i].name == null){
+      $(".addElement").prop("disabled", true);
+    }
   }
 }
 
@@ -305,10 +316,12 @@ function calculateBuffer(){
       buffer[i].bv = 0.00;
     }
     else if (buffer[i].type === "jump"){
-      if (buffer[i].dg === true && parseInt(buffer[0].lod) != 0){
+      if (buffer[i].dg === true && parseInt(buffer[i].lod) != "0"){
         buffer[i].bv = basevalues[buffer[0].name][parseInt(buffer[0].lod) - 1];
       }
+      else{
       buffer[i].bv = basevalues[buffer[0].name][buffer[0].lod];
+}
     }
     else if (buffer[i].type === "seq"){
       buffer[i].bv = basevalues[buffer[0].name][buffer[0].lod];
@@ -348,13 +361,13 @@ function calculateBuffer(){
         buffer[i].bvGOECalc =  buffer[i].bv;
       }
 
-      if (buffer[i].goe != 0){
-        buffer[i].goeValue = buffer[i].bvGOECalc * (buffer[i].goe/10);
+      if (buffer[0].goe != 0){
+        buffer[i].goeValue = buffer[i].bvGOECalc * (buffer[0].goe/10);
       }
     }
     else{
       buffer[i].bvGOECalc =  buffer[i].bv;
-      buffer[i].goeValue =  buffer[i].goe * 0.5;
+      buffer[i].goeValue =  buffer[0].goe * 0.5;
     }
 
 
@@ -383,10 +396,10 @@ function appendToTable(){
   row = "<tr>";
   row += "<td class=\"numElem\">" + numElementsInTable + "</td>";
   row += "<td>" + elementDisplay.html() + "</td>";
-  row += "<td>" + Math.round(totalBV * 100)/100 + "</td>";
+  row += "<td>" + (Math.round(totalBV * 100)/100).toFixed(2) + "</td>";
   row += "<td>" + buffer[0].goe + "</td>";
-  row += "<td>" + Math.round(totalGOEValue * 100)/100 + "</td>";
-  row += "<td class=\"elemScore\">" + Math.round(totalScore * 100)/100 + "</td>";
+  row += "<td>" + (Math.round(totalGOEValue * 100)/100).toFixed(2) + "</td>";
+  row += "<td class=\"elemScore\">" + (Math.round(totalScore * 100)/100).toFixed(2) + "</td>";
   row += "<td><i class=\"delete far fa-trash-alt\"></i></td>";
   row += "</tr>";
   console.log(row);
@@ -409,5 +422,5 @@ function calculateTotalScore(){
   for (var i = 0; i < $(".elemScore").length; i++){
     totalScore += parseFloat($(".elemScore").eq(i).html());
   }
-  $("#tes").html(totalScore);
+  $("#tes").html((Math.round(totalScore * 100)/100).toFixed(2));
 }
