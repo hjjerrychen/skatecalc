@@ -295,13 +295,13 @@ function clearEntry() {
 
   renderBufferedElement();
 
-  // $("#nav-jmp-tab").removeClass("disabled");
-  // $("#nav-sp-tab").removeClass("disabled");
-  // $("#nav-seq .setLOD button").removeClass("disabled");
-  // $("#nav-seq-tab").removeClass("disabled");
   $("#elem-disp").html("Element");
   $("#goeDisplay").html("GOE");
-  setType();
+  $(".addElement").prop("disabled", true);
+  $(".addJump").prop("disabled", true);
+  $(".setEdge").prop("disabled", true);
+
+  //setType();
 }
 
 function addElement(){
@@ -310,12 +310,7 @@ function addElement(){
   appendToTable();
   calculateTotalScore();
   clearEntry();
-
 }
-
-// function deleteElement(){
-//   alert("Element deleted");
-// }
 
 function calculateBuffer(){
   for (var i = 0; i < buffer.length; i++){
@@ -327,8 +322,8 @@ function calculateBuffer(){
         buffer[i].bv = basevalues[buffer[0].name][parseInt(buffer[0].lod) - 1];
       }
       else{
-      buffer[i].bv = basevalues[buffer[0].name][buffer[0].lod];
-}
+        buffer[i].bv = basevalues[buffer[0].name][buffer[0].lod];
+      }
     }
     else if (buffer[i].type === "seq"){
       buffer[i].bv = basevalues[buffer[0].name][buffer[0].lod];
