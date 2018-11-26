@@ -138,7 +138,7 @@ function setREP(){
 }
 
 function setBonus(){
-  buffer[buffer.length - 1].bonus = !buffer[buffer.length - 1].bonus;
+  buffer[0].bonus = !buffer[0].bonus;
   setType(this);
   renderBufferedElement();
 }
@@ -184,7 +184,6 @@ function addJump(){
     spinV: false,
     fly: false,
     cof: false,
-    bonus: false,
     invalid: false,
     bv: 0.0,
     goeValue: 0.0,
@@ -223,7 +222,7 @@ function renderBufferedElement(){
         elementDisplay.append("+REP");
       }
 
-      if (buffer[i].bonus !== false){
+      if (buffer[0].bonus !== false){
         elementDisplay.append(" x");
       }
 
@@ -344,7 +343,7 @@ function calculateBuffer(){
     //base score calculation
 
     buffer[i].bs = buffer[i].bv;
-    if (buffer[i].bonus === true){
+    if (buffer[0].bonus === true){
       buffer[i].bs *= 1.1;
     }
     if (buffer[i].rep === true){
