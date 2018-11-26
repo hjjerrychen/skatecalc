@@ -55,6 +55,7 @@ function setType(node){
   $("#nav-seq .setLOD button").prop("disabled", false);
   $(".addElement").prop("disabled", false);
   $(".addJump").prop("disabled", false);
+  $(".setEdge").prop("disabled", true);
   if ($(node).parents(".nav-jmp").length){
     buffer[buffer.length - 1].type = "jump";
     $("#nav-sp-tab").addClass("disabled");
@@ -94,6 +95,9 @@ function setType(node){
   for (var i = 0; i < buffer.length; i++){
     if(buffer[i].name == null){
       $(".addElement").prop("disabled", true);
+    }
+    if(buffer[i].name == "Lz" || buffer[i].name == "F"){
+      $(".setEdge").prop("disabled", false);
     }
   }
 }
@@ -302,7 +306,7 @@ function addElement(){
   numElementsInTable++;
   appendToTable();
   calculateTotalScore();
-  clearEntry();
+  //clearEntry();
 
 }
 
@@ -337,7 +341,7 @@ function calculateBuffer(){
         buffer[i].bv = basevalues[buffer[0].name][buffer[0].lod];
       }
     }
-    //
+    //base score calculation
 
     buffer[i].bs = buffer[i].bv;
     if (buffer[i].bonus === true){
@@ -345,6 +349,13 @@ function calculateBuffer(){
     }
     if (buffer[i].rep === true){
       buffer[i].bs *= 0.7;
+    }
+    if (buffer[i].ur === true && buffer[i].edge === true){
+      buffer[i].bs *= 0.6;
+    }
+    else if(buffer[i].ur === true || buffer[i].edge === true || buffer[i].spinV === true){
+      buffer[i].bs *= 0.75;
+
     }
 
     //GOE Caculation
