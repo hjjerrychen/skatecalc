@@ -14,13 +14,19 @@ var buffer = [{
   goe: 0,
   bv: 0.0,
   goeValue: 0.0,
-  bvGOECalc: 0.0,
-  bs: 0.0,
+  bvForGOECalculation: 0.0,
+  bvForScoreCalculation: 0.0,
   elemScore: 0.0
 }];
 
 var elementDisplay;
 var numElementsInTable = 0;
+var tes = 0.0;
+var pcs = [0.0, 0.0, 0.0, 0.0, 0.0];
+var pcsFactor = 1.0;
+var pcsTotal = 0.0;
+var tss = 0.0;
+var deduct = 0.0;
 
 window.onload = function(){
   elementDisplay = $("#elem-disp");
@@ -44,7 +50,112 @@ window.onload = function(){
   $(".addElement").prop("disabled", true);
   $(".addJump").prop("disabled", true);
   $(".setEdge").prop("disabled", true);
+  $(".setSpinV").prop("disabled", true);
+  $("#pcs-ss-box").on("change keyup paste click", updateSS)
+  $("#pcs-ss-slider").on("change input click", updateSS)
+  $("#pcs-tr-box").on("change keyup paste click", updateTR)
+  $("#pcs-tr-slider").on("change input click", updateTR)
+  $("#pcs-pr-box").on("change keyup paste click", updatePR)
+  $("#pcs-pr-slider").on("change input click", updatePR)
+  $("#pcs-co-box").on("change keyup paste click", updateCO)
+  $("#pcs-co-slider").on("change input click", updateCO)
+  $("#pcs-in-box").on("change keyup paste click", updateIN)
+  $("#pcs-in-slider").on("change input click", updateIN)
+  $("#pcs-factor-box").on("change keyup paste click", updateFactor)
+}
 
+function updateTSS(){
+  updatePCS();
+  updateTES();
+  tss = tes + pcsTotal + deduct;
+  tss = Math.round(tss*100)/100;
+  $("#tes").html(tes.toFixed(2));
+  $("#pcs").html(pcsTotal.toFixed(2));
+  $("#tss").html(tss.toFixed(2));
+}
+
+function updatePCS(){
+  pcsTotal = 0;
+  for (var i = 0; i < pcs.length; i++){
+    pcsTotal += pcs[i];
+  }
+  pcsTotal *= pcsFactor;
+  pcsTotal = Math.round(pcsTotal*100)/100
+}
+
+function updateFactor(){
+  pcsFactor = parseFloat(this.value);
+  updateTSS();
+}
+
+function updateSS(){
+  if (this.value > 10){
+    $("#pcs-ss-box").val(10.0);
+    $("#pcs-ss-slider").val(10.0);
+    pcs[0] = 10.0;
+  }
+  else{
+  $("#pcs-ss-box").val(this.value);
+  $("#pcs-ss-slider").val(this.value);
+  pcs[0] = parseFloat(this.value);
+}
+  updateTSS();
+}
+
+function updateTR(){
+  if (this.value > 10){
+    $("#pcs-tr-box").val(10.0);
+    $("#pcs-tr-slider").val(10.0);
+    pcs[1] = 10.0;
+  }
+  else{
+  $("#pcs-tr-box").val(this.value);
+  $("#pcs-tr-slider").val(this.value);
+  pcs[1] = parseFloat(this.value);
+}
+  updateTSS();
+}
+
+function updatePR(){
+  if (this.value > 10){
+    $("#pcs-pr-box").val(10.0);
+    $("#pcs-pr-slider").val(10.0);
+    pcs[2] = 10.0;
+  }
+  else{
+  $("#pcs-pr-box").val(this.value);
+  $("#pcs-pr-slider").val(this.value);
+  pcs[2] = parseFloat(this.value);
+}
+  updateTSS();
+}
+
+function updateCO(){
+  if (this.value > 10){
+    $("#pcs-co-box").val(10.0);
+    $("#pcs-co-slider").val(10.0);
+    pcs[3] = parseFloat(this.value);
+  }
+  else{
+  $("#pcs-co-box").val(this.value);
+  $("#pcs-co-slider").val(this.value);
+  pcs[3] = parseFloat(this.value);
+}
+  updateTSS();
+}
+
+function updateIN(){
+  if (this.value > 10){
+    $("#pcs-in-box").val(10.0);
+    $("#pcs-in-slider").val(10.0);
+    pcs[4] = 10.0;
+  }
+  else{
+  $("#pcs-in-box").val(this.value);
+  $("#pcs-in-slider").val(this.value);
+  pcs[4] = parseFloat(this.value);
+}
+  updateTSS();
 }
 
 function setName(){
@@ -195,11 +306,12 @@ function addJump(){
     invalid: false,
     bv: 0.0,
     goeValue: 0.0,
-    bvGOECalc: 0.0,
-    bs: 0.0,
+    bvForGOECalculation: 0.0,
+    bvForScoreCalculation: 0.0,
     elemScore: 0.0
   });
   elementDisplay.append("+");
+  $(".addJump").prop("disabled", true);
   $("#nav-jmp .setLOD button").prop("disabled", false);
 }
 
@@ -230,11 +342,6 @@ function renderBufferedElement(){
       if (buffer[i].rep !== false){
         elementDisplay.append("+REP");
       }
-
-      if (buffer[0].bonus !== false){
-        elementDisplay.append(" x");
-      }
-
     }
     else if(buffer[i].type === "spin"){
       if (buffer[i].fly !== false){
@@ -271,6 +378,9 @@ function renderBufferedElement(){
       elementDisplay.append("+");
     }
   }
+  if (buffer[0].bonus !== false){
+    elementDisplay.append("  x");
+  }
 
   $("#goeDisplay").html(buffer[0].goe);
 }
@@ -293,8 +403,8 @@ function clearEntry() {
     goe: 0,
     bv: 0.0,
     goeValue: 0.0,
-    bvGOECalc: 0.0,
-    bs: 0.0,
+    bvForGOECalculation: 0.0,
+    bvForScoreCalculation: 0.0,
     elemScore: 0.0
   });
 
@@ -318,7 +428,7 @@ function addElement(){
   calculateBuffer();
   numElementsInTable++;
   appendToTable();
-  calculateTotalScore();
+  updateTSS();
   clearEntry();
 }
 
@@ -352,41 +462,41 @@ function calculateBuffer(){
     }
     //base score calculation
 
-    buffer[i].bs = buffer[i].bv;
+    buffer[i].bvForScoreCalculation = buffer[i].bv;
     if (buffer[0].bonus === true){
-      buffer[i].bs *= 1.1;
+      buffer[i].bvForScoreCalculation *= 1.1;
     }
     if (buffer[i].rep === true){
-      buffer[i].bs *= 0.7;
+      buffer[i].bvForScoreCalculation *= 0.7;
     }
     if (buffer[i].ur === true && buffer[i].edge === true){
-      buffer[i].bs *= 0.6;
+      buffer[i].bvForScoreCalculation *= 0.6;
     }
     else if(buffer[i].ur === true || buffer[i].edge === true || buffer[i].spinV === true){
-      buffer[i].bs *= 0.75;
+      buffer[i].bvForScoreCalculation *= 0.75;
 }
 
     //GOE Caculation
 
     if (buffer[i].name !== "ChSq"){
       if (buffer[i].ur === true && buffer[i].edge === true){
-        buffer[i].bvGOECalc =  buffer[i].bv * 0.6;
+        buffer[i].bvForGOECalculation =  buffer[i].bv * 0.6;
       }
       else if(buffer[i].ur === true || buffer[i].edge === true || buffer[i].spinV === true){
-        buffer[i].bvGOECalc =  buffer[i].bv * 0.75;
+        buffer[i].bvForGOECalculation =  buffer[i].bv * 0.75;
       }
       else{
-        buffer[i].bvGOECalc =  buffer[i].bv;
+        buffer[i].bvForGOECalculation =  buffer[i].bv;
       }
     }
     else{
-      buffer[i].bvGOECalc =  buffer[i].bv;
+      buffer[i].bvForGOECalculation =  buffer[i].bv;
       buffer[0].goeValue =  buffer[0].goe * 0.5;
     }
-    buffer[i].bvGOECalc = Math.round(buffer[i].bvGOECalc*100)/100;
-//console.log((buffer[i].bvGOECalc));
-    bufferBV.push(buffer[i].bvGOECalc);
-    //alert(buffer[i].bvGOECalc);
+    buffer[i].bvForGOECalculation = Math.round(buffer[i].bvForGOECalculation*100)/100;
+//console.log((buffer[i].bvForGOECalculation));
+    bufferBV.push(buffer[i].bvForGOECalculation);
+    //alert(buffer[i].bvForGOECalculation);
 
   }
 //console.log(bufferBV);
@@ -408,7 +518,7 @@ function appendToTable(){
   var row = "";
 
   for (var i = 0; i < buffer.length; i++){
-    totalBV += buffer[i].bs;
+    totalBV += buffer[i].bvForScoreCalculation;
   }
   totalScore = totalBV + buffer[0].goeValue;
 
@@ -433,13 +543,13 @@ function remove(){
     $(".numElem").eq(i).html(i + 1);
     numElementsInTable++;
   }
-  calculateTotalScore();
+  updateTSS();
 }
 
-function calculateTotalScore(){
+function updateTES(){
   var totalScore = 0;
   for (var i = 0; i < $(".elemScore").length; i++){
     totalScore += parseFloat($(".elemScore").eq(i).html());
   }
-  $("#tes").html((Math.round(totalScore * 100)/100).toFixed(2));
+  tes = Math.round(totalScore * 100)/100
 }

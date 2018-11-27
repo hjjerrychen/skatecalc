@@ -28,6 +28,16 @@ body {
   padding: 0em;
 }
 
-#tes-box{
+#tes-box, #pcs-box, #tss-box{
   font-size: 1.8em;
+}
+
+input[type="range"]{
+  width: 75%;
+}
+
+
+
+.pcs {
+  width: 10%;
 }
