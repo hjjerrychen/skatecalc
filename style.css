@@ -31,3 +31,13 @@ body {
 #tes-box{
   font-size: 1.8em;
 }
+
+input[type="range"]{
+  width: 75%;
+}
+
+
+
+.pcs {
+  width: 10%;
+}

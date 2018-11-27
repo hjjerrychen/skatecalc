@@ -21,6 +21,8 @@ var buffer = [{
 
 var elementDisplay;
 var numElementsInTable = 0;
+var totalScore = 0.0;
+var pcs = [0.0, 0.0, 0.0, 0.0, 0.0];
 
 window.onload = function(){
   elementDisplay = $("#elem-disp");
@@ -45,6 +47,90 @@ window.onload = function(){
   $(".addJump").prop("disabled", true);
   $(".setEdge").prop("disabled", true);
   $(".setSpinV").prop("disabled", true);
+  $("#pcs-ss-box").on("change keyup paste click", updateSS)
+  $("#pcs-ss-slider").on("change input click", updateSS)
+  $("#pcs-tr-box").on("change keyup paste click", updateTR)
+  $("#pcs-tr-slider").on("change input click", updateTR)
+  $("#pcs-pr-box").on("change keyup paste click", updatePR)
+  $("#pcs-pr-slider").on("change input click", updatePR)
+  $("#pcs-co-box").on("change keyup paste click", updateCO)
+  $("#pcs-co-slider").on("change input click", updateCO)
+  $("#pcs-in-box").on("change keyup paste click", updateIN)
+  $("#pcs-in-slider").on("change input click", updateIN)
+}
+
+function updatePCS(){
+
+}
+
+function updateSS(){
+  if (this.value > 10){
+    $("#pcs-ss-box").val(10.0);
+    $("#pcs-ss-slider").val(10.0);
+    pcs[0] = 10.0;
+  }
+  else{
+  $("#pcs-ss-box").val(this.value);
+  $("#pcs-ss-slider").val(this.value);
+  pcs[0] = this.value;
+}
+  updatePCS();
+}
+
+function updateTR(){
+  if (this.value > 10){
+    $("#pcs-tr-box").val(10.0);
+    $("#pcs-tr-slider").val(10.0);
+    pcs[1] = 10.0;
+  }
+  else{
+  $("#pcs-tr-box").val(this.value);
+  $("#pcs-tr-slider").val(this.value);
+  pcs[1] = this.value;
+}
+  updatePCS();
+}
+
+function updatePR(){
+  if (this.value > 10){
+    $("#pcs-pr-box").val(10.0);
+    $("#pcs-pr-slider").val(10.0);
+    pcs[2] = 10.0;
+  }
+  else{
+  $("#pcs-pr-box").val(this.value);
+  $("#pcs-pr-slider").val(this.value);
+  pcs[2] = this.value;
+}
+  updatePCS();
+}
+
+function updateCO(){
+  if (this.value > 10){
+    $("#pcs-co-box").val(10.0);
+    $("#pcs-co-slider").val(10.0);
+    pcs[3] = 10.0;
+  }
+  else{
+  $("#pcs-co-box").val(this.value);
+  $("#pcs-co-slider").val(this.value);
+  pcs[3] = this.value;
+}
+  updatePCS();
+}
+
+function updateIN(){
+  if (this.value > 10){
+    $("#pcs-in-box").val(10.0);
+    $("#pcs-in-slider").val(10.0);
+    pcs[4] = 10.0;
+  }
+  else{
+  $("#pcs-in-box").val(this.value);
+  $("#pcs-in-slider").val(this.value);
+  pcs[4] = this.value;
+}
+  updatePCS();
 }
 
 function setName(){
@@ -240,11 +326,6 @@ function renderBufferedElement(){
       if (buffer[i].rep !== false){
         elementDisplay.append("+REP");
       }
-
-      if (buffer[0].bonus !== false){
-        elementDisplay.append(" x");
-      }
-
     }
     else if(buffer[i].type === "spin"){
       if (buffer[i].fly !== false){
@@ -280,6 +361,9 @@ function renderBufferedElement(){
     if (i != buffer.length - 1){
       elementDisplay.append("+");
     }
+  }
+  if (buffer[0].bonus !== false){
+    elementDisplay.append("  x");
   }
 
   $("#goeDisplay").html(buffer[0].goe);
@@ -454,5 +538,6 @@ function calculateTotalScore(){
   for (var i = 0; i < $(".elemScore").length; i++){
     totalScore += parseFloat($(".elemScore").eq(i).html());
   }
-  $("#tes").html((Math.round(totalScore * 100)/100).toFixed(2));
+  totalScore = (Math.round(totalScore * 100)/100).toFixed(2)
+  $("#tes").html(totalScore);
 }
