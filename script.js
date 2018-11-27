@@ -21,8 +21,12 @@ var buffer = [{
 
 var elementDisplay;
 var numElementsInTable = 0;
-var totalScore = 0.0;
+var tes = 0.0;
 var pcs = [0.0, 0.0, 0.0, 0.0, 0.0];
+var pcsFactor = 1.0;
+var pcsTotal = 0.0;
+var tss = 0.0;
+var deduct = 0.0;
 
 window.onload = function(){
   elementDisplay = $("#elem-disp");
@@ -57,10 +61,31 @@ window.onload = function(){
   $("#pcs-co-slider").on("change input click", updateCO)
   $("#pcs-in-box").on("change keyup paste click", updateIN)
   $("#pcs-in-slider").on("change input click", updateIN)
+  $("#pcs-factor-box").on("change keyup paste click", updateFactor)
+}
+
+function updateTSS(){
+  updatePCS();
+  updateTES();
+  tss = tes + pcsTotal + deduct;
+  tss = Math.round(tss*100)/100;
+  $("#tes").html(tes.toFixed(2));
+  $("#pcs").html(pcsTotal.toFixed(2));
+  $("#tss").html(tss.toFixed(2));
 }
 
 function updatePCS(){
+  pcsTotal = 0;
+  for (var i = 0; i < pcs.length; i++){
+    pcsTotal += pcs[i];
+  }
+  pcsTotal *= pcsFactor;
+  pcsTotal = Math.round(pcsTotal*100)/100
+}
 
+function updateFactor(){
+  pcsFactor = parseFloat(this.value);
+  updateTSS();
 }
 
 function updateSS(){
@@ -72,9 +97,9 @@ function updateSS(){
   else{
   $("#pcs-ss-box").val(this.value);
   $("#pcs-ss-slider").val(this.value);
-  pcs[0] = this.value;
+  pcs[0] = parseFloat(this.value);
 }
-  updatePCS();
+  updateTSS();
 }
 
 function updateTR(){
@@ -86,9 +111,9 @@ function updateTR(){
   else{
   $("#pcs-tr-box").val(this.value);
   $("#pcs-tr-slider").val(this.value);
-  pcs[1] = this.value;
+  pcs[1] = parseFloat(this.value);
 }
-  updatePCS();
+  updateTSS();
 }
 
 function updatePR(){
@@ -100,23 +125,23 @@ function updatePR(){
   else{
   $("#pcs-pr-box").val(this.value);
   $("#pcs-pr-slider").val(this.value);
-  pcs[2] = this.value;
+  pcs[2] = parseFloat(this.value);
 }
-  updatePCS();
+  updateTSS();
 }
 
 function updateCO(){
   if (this.value > 10){
     $("#pcs-co-box").val(10.0);
     $("#pcs-co-slider").val(10.0);
-    pcs[3] = 10.0;
+    pcs[3] = parseFloat(this.value);
   }
   else{
   $("#pcs-co-box").val(this.value);
   $("#pcs-co-slider").val(this.value);
-  pcs[3] = this.value;
+  pcs[3] = parseFloat(this.value);
 }
-  updatePCS();
+  updateTSS();
 }
 
 function updateIN(){
@@ -128,9 +153,9 @@ function updateIN(){
   else{
   $("#pcs-in-box").val(this.value);
   $("#pcs-in-slider").val(this.value);
-  pcs[4] = this.value;
+  pcs[4] = parseFloat(this.value);
 }
-  updatePCS();
+  updateTSS();
 }
 
 function setName(){
@@ -415,7 +440,7 @@ function addElement(){
   calculateBuffer();
   numElementsInTable++;
   appendToTable();
-  calculateTotalScore();
+  updateTSS();
   clearEntry();
 }
 
@@ -530,14 +555,13 @@ function remove(){
     $(".numElem").eq(i).html(i + 1);
     numElementsInTable++;
   }
-  calculateTotalScore();
+  updateTSS();
 }
 
-function calculateTotalScore(){
+function updateTES(){
   var totalScore = 0;
   for (var i = 0; i < $(".elemScore").length; i++){
     totalScore += parseFloat($(".elemScore").eq(i).html());
   }
-  totalScore = (Math.round(totalScore * 100)/100).toFixed(2)
-  $("#tes").html(totalScore);
+  tes = Math.round(totalScore * 100)/100
 }
