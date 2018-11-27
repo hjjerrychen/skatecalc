@@ -14,8 +14,8 @@ var buffer = [{
   goe: 0,
   bv: 0.0,
   goeValue: 0.0,
-  bvGOECalc: 0.0,
-  bs: 0.0,
+  bvForGOECalculation: 0.0,
+  bvForScoreCalculation: 0.0,
   elemScore: 0.0
 }];
 
@@ -315,8 +315,8 @@ function addJump(){
     invalid: false,
     bv: 0.0,
     goeValue: 0.0,
-    bvGOECalc: 0.0,
-    bs: 0.0,
+    bvForGOECalculation: 0.0,
+    bvForScoreCalculation: 0.0,
     elemScore: 0.0
   });
   elementDisplay.append("+");
@@ -412,8 +412,8 @@ function clearEntry() {
     goe: 0,
     bv: 0.0,
     goeValue: 0.0,
-    bvGOECalc: 0.0,
-    bs: 0.0,
+    bvForGOECalculation: 0.0,
+    bvForScoreCalculation: 0.0,
     elemScore: 0.0
   });
 
@@ -474,41 +474,41 @@ function calculateBuffer(){
     }
     //base score calculation
 
-    buffer[i].bs = buffer[i].bv;
+    buffer[i].bvForScoreCalculation = buffer[i].bv;
     if (buffer[0].bonus === true){
-      buffer[i].bs *= 1.1;
+      buffer[i].bvForScoreCalculation *= 1.1;
     }
     if (buffer[i].rep === true){
-      buffer[i].bs *= 0.7;
+      buffer[i].bvForScoreCalculation *= 0.7;
     }
     if (buffer[i].ur === true && buffer[i].edge === true){
-      buffer[i].bs *= 0.6;
+      buffer[i].bvForScoreCalculation *= 0.6;
     }
     else if(buffer[i].ur === true || buffer[i].edge === true || buffer[i].spinV === true){
-      buffer[i].bs *= 0.75;
+      buffer[i].bvForScoreCalculation *= 0.75;
 }
 
     //GOE Caculation
 
     if (buffer[i].name !== "ChSq"){
       if (buffer[i].ur === true && buffer[i].edge === true){
-        buffer[i].bvGOECalc =  buffer[i].bv * 0.6;
+        buffer[i].bvForGOECalculation =  buffer[i].bv * 0.6;
       }
       else if(buffer[i].ur === true || buffer[i].edge === true || buffer[i].spinV === true){
-        buffer[i].bvGOECalc =  buffer[i].bv * 0.75;
+        buffer[i].bvForGOECalculation =  buffer[i].bv * 0.75;
       }
       else{
-        buffer[i].bvGOECalc =  buffer[i].bv;
+        buffer[i].bvForGOECalculation =  buffer[i].bv;
       }
     }
     else{
-      buffer[i].bvGOECalc =  buffer[i].bv;
+      buffer[i].bvForGOECalculation =  buffer[i].bv;
       buffer[0].goeValue =  buffer[0].goe * 0.5;
     }
-    buffer[i].bvGOECalc = Math.round(buffer[i].bvGOECalc*100)/100;
-//console.log((buffer[i].bvGOECalc));
-    bufferBV.push(buffer[i].bvGOECalc);
-    //alert(buffer[i].bvGOECalc);
+    buffer[i].bvForGOECalculation = Math.round(buffer[i].bvForGOECalculation*100)/100;
+//console.log((buffer[i].bvForGOECalculation));
+    bufferBV.push(buffer[i].bvForGOECalculation);
+    //alert(buffer[i].bvForGOECalculation);
 
   }
 //console.log(bufferBV);
@@ -530,7 +530,7 @@ function appendToTable(){
   var row = "";
 
   for (var i = 0; i < buffer.length; i++){
-    totalBV += buffer[i].bs;
+    totalBV += buffer[i].bvForScoreCalculation;
   }
   totalScore = totalBV + buffer[0].goeValue;
 
