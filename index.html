@@ -13,7 +13,6 @@
     gtag('config', 'UA-115566042-2');
   </script>
 
-
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
@@ -25,7 +24,8 @@
   <title>FSCalc</title>
 </head>
 <body>
-  <h1>Figure Skating Calculator</h1>
+  <!-- 10:44PM -->
+  <h1>Figure Skating Score Calculator</h1>
 
   <div class="container-fluid m-0 p-0">
     <div class="row">
@@ -40,8 +40,6 @@
             <a class="nav-item nav-link active" id="nav-jmp-tab" data-toggle="tab" href="#nav-jmp" role="tab" aria-controls="nav-jmp" aria-selected="true">Jumps</a>
             <a class="nav-item nav-link" id="nav-sp-tab" data-toggle="tab" href="#nav-sp" role="tab" aria-controls="nav-sp" aria-selected="false">Spins</a>
             <a class="nav-item nav-link" id="nav-seq-tab" data-toggle="tab" href="#nav-seq" role="tab" aria-controls="nav-seq" aria-selected="false">Sequences</a>
-            <a class="nav-item nav-link" id="nav-pcs-tab" data-toggle="tab" href="#nav-pcs" role="tab" aria-controls="nav-pcs" aria-selected="false">PCS</a>
-
           </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
@@ -166,26 +164,9 @@
             </div>
 
           </div>
-
-          <div class="tab-pane fade nav-pcs" id="nav-pcs" role="tabpanel" aria-labelledby="nav-pcs-tab">
-            <h3>Program Component Score</h3>
-            <h6><span>Factor: </span><span><input type="number" id="pcs-factor-box" class="pcs" value="1.0"></span></h6>
-
-            <p><label for="pcs-ss">Skating Skills</label>&nbsp;&nbsp;<input type="number" value ="0.00" class="pcs" id="pcs-ss-box" min="0" max="10" step="0.25"></p>
-            <p>&nbsp;&nbsp;<input type="range" class="custom-range pcs-slider" value ="0.00" min="0" max="10" step="0.25" id="pcs-ss-slider"></p>
-
-            <p><label for="pcs-tr">Transitions</label>&nbsp;&nbsp;<input type="number" value ="0.00" class="pcs" id="pcs-tr-box" min="0" max="10" step="0.25"></p>
-            <p>&nbsp;&nbsp;<input type="range" class="custom-range pcs-slider" value ="0.00" min="0" max="10" step="0.25" id="pcs-tr-slider"></p>
-
-            <p><label for="pcs-pr">Performance</label>&nbsp;&nbsp;<input type="number" value ="0.00" class="pcs" id="pcs-pr-box" min="0" max="10" step="0.25"></p>
-            <p>&nbsp;&nbsp;<input type="range" class="custom-range pcs-slider" value ="0.00" min="0" max="10" step="0.25" id="pcs-pr-slider"></p>
-
-            <p><label for="pcs-co">Composition</label>&nbsp;&nbsp;<input type="number" value ="0.00" class="pcs" id="pcs-co-box" min="0" max="10" step="0.25"></p>
-            <p>&nbsp;&nbsp;<input type="range" class="custom-range pcs-slider" value ="0.00" min="0" max="10" step="0.25" id="pcs-co-slider"></p>
-
-            <p><label for="pcs-in">Interpretation of the Music</label>&nbsp;&nbsp;<input type="number" id="pcs-in-box" value ="0.00" class="pcs" min="0" max="10" step="0.25"></p>
-            <p>&nbsp;&nbsp;<input type="range" class="custom-range pcs-slider" value ="0.00" min="0" max="10" step="0.25" id="pcs-in-slider"></p>
-
+          <div>
+            <button type="button" class="btn btn-outline-danger clearEntry">Clear Entry</button>
+            <button type="button" class="btn btn-outline-success addElement">Add Element</button>
           </div>
         </div>
       </div>
@@ -204,24 +185,22 @@
           </thead>
           <tbody class="displayTable">
             <!-- <tr>
-            <td>1</td>
-            <td>1A&lt;*</td>
-            <td>1.1</td>
-            <td>+4</td>
-            <td>0.5</td>
-            <td>1.6</td>
-            <td><i class="delete far fa-trash-alt"></i></td>
-          </tr> -->
-        </tbody>
-      </table>
-      <p id="tes-box"><span>Technical Element Score: </span><span id="tes"></span> </p>
-      <p id="pcs-box"><span>Program Component Score: </span><span id="pcs"></span> </p>
-      <p id="tss-box"><span>Total Score: </span><span id="tss"></span> </p>
+              <td>1</td>
+              <td>1A&lt;*</td>
+              <td>1.1</td>
+              <td>+4</td>
+              <td>0.5</td>
+              <td>1.6</td>
+              <td><i class="delete far fa-trash-alt"></i></td>
+            </tr> -->
+          </tbody>
+        </table>
+        <p id="tes-box"><span>Technical Element Score: </span><span id="tes"></span> </p>
+      </div>
     </div>
 
-  <hr />
-  <p><small>[Version 0.2 &centerdot; Nov 26, 2018] Made by <a href="https://github.com/jerry70450/FSCalc">Jerry Chen</a>.</small></p>
-</div>
+<hr />
+  </div>
 
 </body>
 </html>
