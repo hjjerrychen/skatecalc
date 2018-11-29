@@ -95,10 +95,10 @@ function updateSS(){
     pcs[0] = 10.0;
   }
   else{
-  $("#pcs-ss-box").val(this.value);
-  $("#pcs-ss-slider").val(this.value);
-  pcs[0] = parseFloat(this.value);
-}
+    $("#pcs-ss-box").val(this.value);
+    $("#pcs-ss-slider").val(this.value);
+    pcs[0] = parseFloat(this.value);
+  }
   updateTSS();
 }
 
@@ -109,10 +109,10 @@ function updateTR(){
     pcs[1] = 10.0;
   }
   else{
-  $("#pcs-tr-box").val(this.value);
-  $("#pcs-tr-slider").val(this.value);
-  pcs[1] = parseFloat(this.value);
-}
+    $("#pcs-tr-box").val(this.value);
+    $("#pcs-tr-slider").val(this.value);
+    pcs[1] = parseFloat(this.value);
+  }
   updateTSS();
 }
 
@@ -123,10 +123,10 @@ function updatePR(){
     pcs[2] = 10.0;
   }
   else{
-  $("#pcs-pr-box").val(this.value);
-  $("#pcs-pr-slider").val(this.value);
-  pcs[2] = parseFloat(this.value);
-}
+    $("#pcs-pr-box").val(this.value);
+    $("#pcs-pr-slider").val(this.value);
+    pcs[2] = parseFloat(this.value);
+  }
   updateTSS();
 }
 
@@ -137,10 +137,10 @@ function updateCO(){
     pcs[3] = parseFloat(this.value);
   }
   else{
-  $("#pcs-co-box").val(this.value);
-  $("#pcs-co-slider").val(this.value);
-  pcs[3] = parseFloat(this.value);
-}
+    $("#pcs-co-box").val(this.value);
+    $("#pcs-co-slider").val(this.value);
+    pcs[3] = parseFloat(this.value);
+  }
   updateTSS();
 }
 
@@ -151,10 +151,10 @@ function updateIN(){
     pcs[4] = 10.0;
   }
   else{
-  $("#pcs-in-box").val(this.value);
-  $("#pcs-in-slider").val(this.value);
-  pcs[4] = parseFloat(this.value);
-}
+    $("#pcs-in-box").val(this.value);
+    $("#pcs-in-slider").val(this.value);
+    pcs[4] = parseFloat(this.value);
+  }
   updateTSS();
 }
 
@@ -209,7 +209,7 @@ function setType(node){
   //   $(".addJump").prop("disabled", true);
   // }
 
-//disable v if
+  //disable v if
   if (buffer[buffer.length - 1].cof != true && buffer[buffer.length - 1].fly != true){
     $(".setSpinV").prop("disabled", true);
   }
@@ -326,6 +326,9 @@ function addJump(){
 
 function renderBufferedElement(){
   elementDisplay.html("");
+  if (buffer[0].name === null){
+    elementDisplay.append("Element");
+  }
 
   for (var i = 0; i < buffer.length; i++){
     if(buffer[i].type === "jump"){
@@ -391,7 +394,12 @@ function renderBufferedElement(){
     elementDisplay.append("  x");
   }
 
-  $("#goeDisplay").html(buffer[0].goe);
+  if (buffer[0].goe > 0){
+    $("#goeDisplay").html("+" + buffer[0].goe);
+  }
+  else {
+    $("#goeDisplay").html(buffer[0].goe);
+  }
 }
 
 function clearEntry() {
@@ -486,7 +494,7 @@ function calculateBuffer(){
     }
     else if(buffer[i].ur === true || buffer[i].edge === true || buffer[i].spinV === true){
       buffer[i].bvForScoreCalculation *= 0.75;
-}
+    }
 
     //GOE Caculation
 
@@ -506,19 +514,19 @@ function calculateBuffer(){
       buffer[0].goeValue =  buffer[0].goe * 0.5;
     }
     buffer[i].bvForGOECalculation = Math.round(buffer[i].bvForGOECalculation*100)/100;
-//console.log((buffer[i].bvForGOECalculation));
+    //console.log((buffer[i].bvForGOECalculation));
     bufferBV.push(buffer[i].bvForGOECalculation);
     //alert(buffer[i].bvForGOECalculation);
 
   }
-//console.log(bufferBV);
-//console.log(Math.max(bufferBV));
+  //console.log(bufferBV);
+  //console.log(Math.max(bufferBV));
   if (buffer[0].name !== "ChSq"){
-  if (buffer[0].goe != 0){
-    buffer[0].goeValue = Math.max(...bufferBV) * (buffer[0].goe*0.1);
+    if (buffer[0].goe != 0){
+      buffer[0].goeValue = Math.max(...bufferBV) * (buffer[0].goe*0.1);
+    }
+    buffer[0].goeValue =   Math.round(buffer[0].goeValue*100)/100;
   }
-  buffer[0].goeValue =   Math.round(buffer[0].goeValue*100)/100;
-}
 }
 
 //console.log("The bv of " + buffer[0].name + buffer[0].lod + " is " + basevalues["F"+buffer[0].name][buffer[0].lod]);

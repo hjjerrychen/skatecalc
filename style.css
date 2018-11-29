@@ -36,8 +36,24 @@ input[type="range"]{
   width: 75%;
 }
 
+h6{
+  margin-top: 8px;
+  margin-bottom: 0px;
+}
 
+p{
+  margin-bottom: 8px;
+}
+
+hr{
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
 
 .pcs {
   width: 20%;
+}
+
+.clearEntry, .addElement{
+  margin-top: 14px;
 }
