@@ -57,3 +57,7 @@ hr{
 .clearEntry, .addElement{
   margin-top: 14px;
 }
+
+#factor {
+  font-weight: 500;
+}
