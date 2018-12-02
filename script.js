@@ -326,7 +326,7 @@ function addJump(){
 
 function renderBufferedElement(){
   elementDisplay.html("");
-  if (buffer[0].name === null){
+  if (buffer[0].name === null && buffer[0].lod === 0){
     elementDisplay.append("Element");
   }
 
