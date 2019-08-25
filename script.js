@@ -68,7 +68,7 @@ function updateTSS(){
   updatePCS();
   updateTES();
   tss = tes + pcsTotal + deduct;
-  tss = Math.round(tss*100)/100;
+  tss = Math.round(tss * 1000 / 10) / 100;
   $("#tes").html(tes.toFixed(2));
   $("#pcs").html(pcsTotal.toFixed(2));
   $("#tss").html(tss.toFixed(2));
@@ -80,7 +80,7 @@ function updatePCS(){
     pcsTotal += pcs[i];
   }
   pcsTotal *= pcsFactor;
-  pcsTotal = Math.round(pcsTotal*100)/100
+  pcsTotal = Math.round(pcsTotal * 1000 / 10) / 100
 }
 
 function updateFactor(){
@@ -492,8 +492,11 @@ function calculateBuffer(){
     if (buffer[i].ur === true && buffer[i].edge === true){
       buffer[i].bvForScoreCalculation *= 0.6;
     }
-    else if(buffer[i].ur === true || buffer[i].edge === true || buffer[i].spinV === true){
+    else if (buffer[i].spinV === true){
       buffer[i].bvForScoreCalculation *= 0.75;
+    }    
+    else if(buffer[i].ur === true || buffer[i].edge === true){
+      buffer[i].bvForScoreCalculation *= 0.8;
     }
 
     //GOE Caculation
@@ -502,8 +505,11 @@ function calculateBuffer(){
       if (buffer[i].ur === true && buffer[i].edge === true){
         buffer[i].bvForGOECalculation =  buffer[i].bv * 0.6;
       }
-      else if(buffer[i].ur === true || buffer[i].edge === true || buffer[i].spinV === true){
+      else if (buffer[i].spinV === true){
         buffer[i].bvForGOECalculation =  buffer[i].bv * 0.75;
+      } 
+      else if(buffer[i].ur === true || buffer[i].edge === true){
+        buffer[i].bvForGOECalculation =  buffer[i].bv * 0.8;
       }
       else{
         buffer[i].bvForGOECalculation =  buffer[i].bv;
@@ -513,7 +519,7 @@ function calculateBuffer(){
       buffer[i].bvForGOECalculation =  buffer[i].bv;
       buffer[0].goeValue =  buffer[0].goe * 0.5;
     }
-    buffer[i].bvForGOECalculation = Math.round(buffer[i].bvForGOECalculation*100)/100;
+    buffer[i].bvForGOECalculation = Math.round(buffer[i].bvForGOECalculation * 1000 / 10) / 100;
     //console.log((buffer[i].bvForGOECalculation));
     bufferBV.push(buffer[i].bvForGOECalculation);
     //alert(buffer[i].bvForGOECalculation);
@@ -523,9 +529,9 @@ function calculateBuffer(){
   //console.log(Math.max(bufferBV));
   if (buffer[0].name !== "ChSq"){
     if (buffer[0].goe != 0){
-      buffer[0].goeValue = Math.max(...bufferBV) * (buffer[0].goe*0.1);
+      buffer[0].goeValue = Math.max(...bufferBV) * (buffer[0].goe * 0.1);
     }
-    buffer[0].goeValue =   Math.round(buffer[0].goeValue*100)/100;
+    buffer[0].goeValue =   Math.round(buffer[0].goeValue * 1000 / 10) / 100;
   }
 }
 
@@ -545,10 +551,10 @@ function appendToTable(){
   row = "<tr>";
   row += "<td class=\"numElem\">" + numElementsInTable + "</td>";
   row += "<td>" + elementDisplay.html() + "</td>";
-  row += "<td>" + (Math.round(totalBV * 100)/100).toFixed(2) + "</td>";
+  row += "<td>" + (Math.round(totalBV * 1000 / 10) / 100).toFixed(2) + "</td>";
   row += "<td>" + buffer[0].goe + "</td>";
-  row += "<td>" + (Math.round(buffer[0].goeValue*100)/100).toFixed(2) + "</td>";
-  row += "<td class=\"elemScore\">" + (Math.round(totalScore * 100)/100).toFixed(2) + "</td>";
+  row += "<td>" + (Math.round(buffer[0].goeValue * 1000 / 10) / 100).toFixed(2) + "</td>";
+  row += "<td class=\"elemScore\">" + (Math.round(totalScore * 1000 / 10) / 100).toFixed(2) + "</td>";
   row += "<td><i class=\"delete far fa-trash-alt\"></i></td>";
   row += "</tr>";
   //console.log(row);
@@ -571,5 +577,5 @@ function updateTES(){
   for (var i = 0; i < $(".elemScore").length; i++){
     totalScore += parseFloat($(".elemScore").eq(i).html());
   }
-  tes = Math.round(totalScore * 100)/100
+  tes = Math.round(totalScore * 1000 / 10) / 100
 }
