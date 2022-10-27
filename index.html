@@ -3,16 +3,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115566042-2"></script>
-  <script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2Y43BQ5433"></script>
+<script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
+  gtag('config', 'G-2Y43BQ5433');
   gtag('config', 'UA-115566042-2');
-  </script>
-
+</script>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -22,12 +23,12 @@
   <script src="basevalues.js"></script>
   <script src="script.js"></script>
   <link rel="stylesheet" type="text/css" href="style.css">
-  <title>FSCalc</title>
+  <title>SkateCalc</title>
 </head>
 <body>
 
   <div class="alert alert-warning alert-dismissible fade show" role="alert">
-    <strong>Update:</strong> SOV values from <a href="https://www.isu.org/inside-isu/isu-communications/communications/21210-2253-s-p-sov-2019-20/file" target="_blank">ISU Communications 2253</a> for the 2019/2020 season is now implemented!
+    <strong>FSCalc is now SkateCalc!</strong> You can find us at <a href="https://www.skatecalc.com">www.skatecalc.com</a>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -241,22 +242,23 @@
 
           <div class="tab-pane fade nav-pcs" id="nav-pcs" role="tabpanel" aria-labelledby="nav-pcs-tab">
             <h3>Program Component Score</h3>
-            <p id="factor"><span>Factor: </span><span><input type="number" id="pcs-factor-box" class="pcs" value="1.0"></span></p>
+            <p id="factor"><span>Factor: </span><span><input type="number" id="pcs-factor-box" class="pcs" value="1.67"></span></p>
+
+            <!-- <p><label for="pcs-tr">Transitions</label>&nbsp;&nbsp;<input type="number" value ="0.00" class="pcs" id="pcs-tr-box" min="0" max="10" step="0.25"></p>
+            <p>&nbsp;&nbsp;<input type="range" class="custom-range pcs-slider" value ="0.00" min="0" max="10" step="0.25" id="pcs-tr-slider"></p>
+ -->
+
+            <p><label for="pcs-co">Composition</label>&nbsp;&nbsp;<input type="number" value ="0.00" class="pcs" id="pcs-co-box" min="0" max="10" step="0.25"></p>
+            <p>&nbsp;&nbsp;<input type="range" class="custom-range pcs-slider" value ="0.00" min="0" max="10" step="0.25" id="pcs-co-slider"></p>
+            
+            <p><label for="pcs-pr">Presentation</label>&nbsp;&nbsp;<input type="number" value ="0.00" class="pcs" id="pcs-pr-box" min="0" max="10" step="0.25"></p>
+            <p>&nbsp;&nbsp;<input type="range" class="custom-range pcs-slider" value ="0.00" min="0" max="10" step="0.25" id="pcs-pr-slider"></p>
 
             <p><label for="pcs-ss">Skating Skills</label>&nbsp;&nbsp;<input type="number" value ="0.00" class="pcs" id="pcs-ss-box" min="0" max="10" step="0.25"></p>
             <p>&nbsp;&nbsp;<input type="range" class="custom-range pcs-slider" value ="0.00" min="0" max="10" step="0.25" id="pcs-ss-slider"></p>
 
-            <p><label for="pcs-tr">Transitions</label>&nbsp;&nbsp;<input type="number" value ="0.00" class="pcs" id="pcs-tr-box" min="0" max="10" step="0.25"></p>
-            <p>&nbsp;&nbsp;<input type="range" class="custom-range pcs-slider" value ="0.00" min="0" max="10" step="0.25" id="pcs-tr-slider"></p>
-
-            <p><label for="pcs-pr">Performance</label>&nbsp;&nbsp;<input type="number" value ="0.00" class="pcs" id="pcs-pr-box" min="0" max="10" step="0.25"></p>
-            <p>&nbsp;&nbsp;<input type="range" class="custom-range pcs-slider" value ="0.00" min="0" max="10" step="0.25" id="pcs-pr-slider"></p>
-
-            <p><label for="pcs-co">Composition</label>&nbsp;&nbsp;<input type="number" value ="0.00" class="pcs" id="pcs-co-box" min="0" max="10" step="0.25"></p>
-            <p>&nbsp;&nbsp;<input type="range" class="custom-range pcs-slider" value ="0.00" min="0" max="10" step="0.25" id="pcs-co-slider"></p>
-
-            <p><label for="pcs-in">Interpretation of the Music</label>&nbsp;&nbsp;<input type="number" id="pcs-in-box" value ="0.00" class="pcs" min="0" max="10" step="0.25"></p>
-            <p>&nbsp;&nbsp;<input type="range" class="custom-range pcs-slider" value ="0.00" min="0" max="10" step="0.25" id="pcs-in-slider"></p>
+            <!-- <p><label for="pcs-in">Interpretation of the Music</label>&nbsp;&nbsp;<input type="number" id="pcs-in-box" value ="0.00" class="pcs" min="0" max="10" step="0.25"></p>
+            <p>&nbsp;&nbsp;<input type="range" class="custom-range pcs-slider" value ="0.00" min="0" max="10" step="0.25" id="pcs-in-slider"></p> -->
 
           </div>
 
@@ -295,7 +297,7 @@
   </div>
 
   <hr />
-  <p><small>[Version 0.2.2 &centerdot; Aug 25, 2019]. Figure Skating Score Calculator. <a href="https://github.com/jerry70450/FSCalc">GitHub</a>.</small></p>
+  <p><small>[Version 0.2.3 &centerdot; Oct 27, 2022]. Figure Skating Score Calculator. <a href="https://github.com/hjjerrychen/skatecalc">GitHub</a>.</small></p>
 </div>
 
 </body>

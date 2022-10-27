@@ -23,7 +23,7 @@ var elementDisplay;
 var numElementsInTable = 0;
 var tes = 0.0;
 var pcs = [0.0, 0.0, 0.0, 0.0, 0.0];
-var pcsFactor = 1.0;
+var pcsFactor = 1.67;
 var pcsTotal = 0.0;
 var tss = 0.0;
 var deduct = 0.0;
